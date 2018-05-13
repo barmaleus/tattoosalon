@@ -1,0 +1,34 @@
+body {
+    padding: 20px;
+    text-align: center;
+    font: 100%/1.4 Verdana, Arial, Helvetica, sans-serif;
+    background-color: #EEE;
+    margin: 0;
+    padding: 0;
+    color: #000;
+ }
+.footer {
+    position: fixed;
+    left: 0; bottom: 0;
+    padding: 10px;
+    background: #39b54a;
+    color: #fff; /* Text color */
+    width: 100%;
+    text-align: center;
+   }
+
+/*#loginform {*/
+    /*position: fixed;*/
+    /*left: 50%;*/
+    /*margin-left: -150px;*/
+   /*}*/
+#loginform input{
+    text-align: center;
+}
+   
+.container {
+    width: 1000px;
+    background-color: #FFF;
+    margin: 0 auto; 
+    height:800px;
+}
