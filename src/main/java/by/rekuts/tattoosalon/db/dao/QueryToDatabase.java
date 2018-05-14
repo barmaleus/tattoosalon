@@ -10,6 +10,7 @@ public enum QueryToDatabase {
     CHECK_LOGIN("SELECT count(login) FROM users WHERE login = ?"),
     CHECK_EMAIL("SELECT count(email) FROM users WHERE email = ?"),
     UPDATE_USER_BLOCKED("UPDATE users SET blocked = ? WHERE userid = ?"),
+    UPDATE_USER_ROLE("UPDATE users SET userrole = ? WHERE userid = ?"),
     SELECT_MASTERS("SELECT login FROM users where userrole = ?"),
     SELECT_ALL_USERS("SELECT userid, login, email, gender, userrole, register, birth, blocked FROM users"),
     SELECT_SUM_AUTHORS_PUBLICATION("SELECT count(id_publication) FROM publication LEFT JOIN users ON author_id = userid WHERE login = ?"),

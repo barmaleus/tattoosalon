@@ -43,4 +43,8 @@ public class UserLogic {
     public static boolean makeUserBlocked(int userId, boolean blockedParameter) {
         return UpdatingUserDAO.makeUserBlocked(userId, blockedParameter);
     }
+
+    public static boolean changeUserRole(int userId, int userRoleId) {
+        return UpdatingUserDAO.changeUserRole(userId, userRoleId);
+    }
 }

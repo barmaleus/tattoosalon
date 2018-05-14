@@ -3,7 +3,7 @@
 <section>
     <c:choose>
         <c:when test="${userRange == 0 || user == uname.login}"><%--if user is himself or admin--%>
-            * Id: ${uname.id}
+            Id: ${uname.id}
             <br>
             Login: ${uname.login}
             <br>
@@ -50,7 +50,16 @@
             <br>
             Wroted comments: ${commentsSum}     <%--todo--%>
             <br>
-            Delete <a href="controller?command=cabinet&uname=${uname.login}&&command=delete_user">account</a>  <%--TODO !!! make another command!!!!!!!!! todo make tiser? which asks, really you want to delete account?--%> <%--if user is himself js-> onclick--%>
+            <a href="controller?command=cabinet_block_user&userId=${uname.id}&uname=${uname.login}&blocked=${uname.blocked}">
+                <c:choose>
+                    <c:when test="${uname.blocked}">
+                        Restore account
+                    </c:when>
+                    <c:otherwise>
+                        Delete account
+                    </c:otherwise>
+                </c:choose>
+            </a>
         </c:when>
         <c:otherwise>
             Login: ${uname.login}

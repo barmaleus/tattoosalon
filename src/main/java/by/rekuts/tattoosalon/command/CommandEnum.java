@@ -31,6 +31,11 @@ public enum CommandEnum {
             this.command = new BlockUserCommand();
         }
     },
+    CABINET_BLOCK_USER {
+        {
+            this.command = new CabinetBlockCommand();
+        }
+    },
     MAIN {
         {
             this.command = new PageMainCommand();
@@ -89,6 +94,11 @@ public enum CommandEnum {
     BLOCK_PUBLICATION {
         {
             this.command = new BlockPublicationCommand();
+        }
+    },
+    ROLE_USER {
+        {
+            this.command = new ChangeUserRoleCommand();
         }
     };
     ActionCommand command;

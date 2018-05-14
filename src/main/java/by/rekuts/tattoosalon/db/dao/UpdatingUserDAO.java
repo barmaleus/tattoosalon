@@ -59,5 +59,24 @@ public class UpdatingUserDAO {
         return flag;
     }
 
-
+    public static boolean changeUserRole(int userId, int userRoleId) {
+        Connection connection = null;
+        PreparedStatement preparedStatement;
+        boolean flag = false;
+        try {
+            connection = ConnectionPool.getInstance().getConnection();
+            preparedStatement = connection.prepareStatement(QueryToDatabase.UPDATE_USER_ROLE.getQuery());
+            preparedStatement.setInt(1, userRoleId);
+            preparedStatement.setInt(2, userId);
+            preparedStatement.executeUpdate();
+            flag = true;
+        } catch (SQLException e) {
+            LOGGER.log(Level.WARN, "Can't change user 'userRole' parameter. ", e);
+        } finally {
+            if (connection != null) {
+                ConnectionPool.getInstance().returnConnectionToPool(connection);
+            }
+        }
+        return flag;
+    }
 }

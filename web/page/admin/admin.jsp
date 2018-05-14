@@ -80,13 +80,13 @@
                 <c:when test="${user.userRole == 0}">
                     <form name="userroleform" action="controller" method="POST" id="userroleform">
                         <input type="hidden" name="command" value="role_user" />
-                        <input type="hidden" name="publicationId" value="${user.id}" />
+                        <input type="hidden" name="userId" value="${user.id}" />
                         <input type="hidden" name="operation" value="makeMaster" />
                         <input type="submit" name="user-role-button" value="Make Admin Master" />
                     </form>
                     <form name="userroleform" action="controller" method="POST" id="userroleform">
                         <input type="hidden" name="command" value="role_user" />
-                        <input type="hidden" name="publicationId" value="${user.id}" />
+                        <input type="hidden" name="userId" value="${user.id}" />
                         <input type="hidden" name="operation" value="makeUser" />
                         <input type="submit" name="user-role-button" value="Make Admin User" />
                     </form>
@@ -94,13 +94,13 @@
                 <c:when test="${user.userRole == 1}">
                     <form name="userroleform" action="controller" method="POST" id="userroleform">
                         <input type="hidden" name="command" value="role_user" />
-                        <input type="hidden" name="publicationId" value="${user.id}" />
+                        <input type="hidden" name="userId" value="${user.id}" />
                         <input type="hidden" name="operation" value="makeAdmin" />
                         <input type="submit" name="user-role-button" value="Make Master Admin" />
                     </form>
                     <form name="userroleform" action="controller" method="POST" id="userroleform">
                         <input type="hidden" name="command" value="role_user" />
-                        <input type="hidden" name="publicationId" value="${user.id}" />
+                        <input type="hidden" name="userId" value="${user.id}" />
                         <input type="hidden" name="operation" value="makeUser" />
                         <input type="submit" name="user-role-button" value="Make Master User" />
                     </form>
@@ -108,13 +108,13 @@
                 <c:otherwise>
                     <form name="userroleform" action="controller" method="POST" id="userroleform">
                         <input type="hidden" name="command" value="role_user" />
-                        <input type="hidden" name="publicationId" value="${user.id}" />
+                        <input type="hidden" name="userId" value="${user.id}" />
                         <input type="hidden" name="operation" value="makeAdmin" />
                         <input type="submit" name="user-role-button" value="Make User Admin" />
                     </form>
                     <form name="userroleform" action="controller" method="POST" id="userroleform">
                         <input type="hidden" name="command" value="role_user" />
-                        <input type="hidden" name="publicationId" value="${user.id}" />
+                        <input type="hidden" name="userId" value="${user.id}" />
                         <input type="hidden" name="operation" value="makeMaster" />
                         <input type="submit" name="user-role-button" value="Make User Master" />
                     </form>
