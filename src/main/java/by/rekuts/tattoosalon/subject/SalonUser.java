@@ -33,7 +33,7 @@ public class SalonUser extends SalonEntity implements Serializable {
         this.registration = registration;
         this.birth = birth;
         this.blocked = blocked;
-    }   //need else constructors?? TODO
+    }
 
     public SalonUser(String login, String password, String email, boolean male, LocalDate birth) {
         this.login = login;

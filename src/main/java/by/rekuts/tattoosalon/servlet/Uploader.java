@@ -2,6 +2,7 @@ package by.rekuts.tattoosalon.servlet;
 
 import by.rekuts.tattoosalon.db.dao.PublicationDAO;
 import by.rekuts.tattoosalon.resource.ConfigurationManager;
+import by.rekuts.tattoosalon.resource.MessageManager;
 import by.rekuts.tattoosalon.subject.Publication;
 import org.apache.commons.lang3.StringUtils;
 
@@ -67,7 +68,7 @@ public class Uploader extends HttpServlet {
                     fileName = StringUtils.join(new ArrayList<String>(Arrays.asList(parts)), ".");
                     savingFilePath = new File(savePath + File.separator + fileName);
                 } else {
-                    request.setAttribute("fileTypeError", "Somthing went wrong. You can't upload this file. Rename it or choose another file.");
+                    request.setAttribute("fileTypeError", MessageManager.getProperty("message.ubloader.bigsize"));
                     String page = ConfigurationManager.getProperty(("path.page.uploader"));
                     getServletContext().getRequestDispatcher(page).forward(request, response);
                 }
@@ -104,12 +105,10 @@ public class Uploader extends HttpServlet {
                 }
             }
         } else {
-            request.setAttribute("fileTypeError", "You can't upload this file. Upload image of .gif, .png or .jpg format.");
+            request.setAttribute("fileTypeError", MessageManager.getProperty("message.uploader.wrongtype"));
             String page = ConfigurationManager.getProperty(("path.page.uploader"));
             getServletContext().getRequestDispatcher(page).forward(request, response);
         }
-
-
     }
 
     /**

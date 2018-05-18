@@ -15,7 +15,11 @@ public enum QueryToDatabase {
     SELECT_ALL_USERS("SELECT userid, login, email, gender, userrole, register, birth, blocked FROM users"),
     SELECT_SUM_AUTHORS_PUBLICATION("SELECT count(id_publication) FROM publication LEFT JOIN users ON author_id = userid WHERE login = ?"),
     INSERT_NEW_PUBLICATION("INSERT INTO publication(title, content, content_type, author_id) VALUES (?, ?, ?, (SELECT userid FROM users WHERE login = ?))"),
-    UPDATE_PUBLICATION_BLOCKED("UPDATE publication SET blocked = ? WHERE id_publication = ?");
+    UPDATE_PUBLICATION_BLOCKED("UPDATE publication SET blocked = ? WHERE id_publication = ?"),
+    INSERT_NEW_APPOINTMENT("INSERT INTO appointment (appointment_type, master_id, client_id, begining_time, ending_time, ordering_time, status) VALUES (?, ?, ?, ?, ?, ?, ?)"),
+    SELECT_APPOINTMENTS_BY_MASTER_ID("SELECT appointment_id, appointment_type, master_id, client_id, begining_time, ending_time, ordering_time, status FROM appointment WHERE master_id = ?"),
+    SELECT_APPOINTMENTS_BY_MASTER_ID_FOR_NEX_14_DAYS("SELECT appointment_id, appointment_type, master_id, client_id, begining_time, ending_time, ordering_time, status FROM appointment WHERE master_id = ? AND begining_time BETWEEN current_timestamp AND date_add(current_timestamp,interval 14 day)"),
+    SELECT_APPOINTMENTS_BY_CLIENT_ID_FOR_NEX_14_DAYS("SELECT appointment_id, appointment_type, master_id, client_id, begining_time, ending_time, ordering_time, status FROM appointment WHERE client_id = ? AND begining_time BETWEEN current_timestamp AND date_add(current_timestamp,interval 14 day)");
 
     private final String query;
     QueryToDatabase(String query) {

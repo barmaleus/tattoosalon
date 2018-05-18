@@ -3,7 +3,7 @@
     <p>Fulfill this form to upload new article to the site.</p>
 
     <form action="controller" method="POST">
-        <input type="hidden" name="command" value="uploaded" />
+        <input type="hidden" name="command" value="confirmation" />
         <fieldset>
             <legend>Creating form:</legend>
             <span class="req">*</span>Title:
@@ -16,6 +16,4 @@
             <input type="submit" value="Upload text" />
         </fieldset>
     </form>
-
-    <%--todo adding to database--%>
 </section>

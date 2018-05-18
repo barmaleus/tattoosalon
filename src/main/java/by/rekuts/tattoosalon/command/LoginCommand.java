@@ -7,6 +7,7 @@ import by.rekuts.tattoosalon.resource.ConfigurationManager;
 import by.rekuts.tattoosalon.resource.MessageManager;
 import by.rekuts.tattoosalon.subject.ListPage;
 import by.rekuts.tattoosalon.subject.Publication;
+import by.rekuts.tattoosalon.subject.SalonUser;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -25,8 +26,10 @@ public class LoginCommand implements ActionCommand {
         // проверка логина и пароля
         if (LoginLogic.checkLogin(login, pass)) {
             HttpSession session = request.getSession();
-            session.setAttribute("user", login);
-            session.setAttribute("userRange", UserLogic.checkUserRole(login));
+            SalonUser user = UserLogic.loadPersonalData(login);
+            session.setAttribute("salonUser", user);
+            session.setAttribute("user", login);                                        //todo заменить на salonUser
+            session.setAttribute("userRange", UserLogic.checkUserRole(login));                 //todo заменить на salonUser
             ArrayList<Publication> allPublications = PublicationLogic.viewAllUnblockedPublications();
             request.setAttribute("allPublications", allPublications);
             ListPage<Publication> results = new ListPage<>(allPublications, 0, allPublications.size(), 3);

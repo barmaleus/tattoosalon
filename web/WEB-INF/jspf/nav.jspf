@@ -5,9 +5,9 @@
     <li><a href="controller?command=article&page=0"><fmt:message key="nav.articles" bundle="${lang}"/></a></li>
     <li><a href="controller?command=gallery&page=0"><fmt:message key="nav.gallery" bundle="${lang}"/></a></li>
     <li><a href="controller?command=masters"><fmt:message key="nav.masters" bundle="${lang}"/></a></li>
-    <li><a href="#controller?command=appointment"><fmt:message key="nav.appointment" bundle="${lang}"/></a></li>   <!-- todo -->
+    <li><a href="controller?command=appointment"><fmt:message key="nav.appointment" bundle="${lang}"/></a></li>
     <li><a href="controller?command=mail"><fmt:message key="nav.contact" bundle="${lang}"/></a></li>
-    <li><a href="../../page/error/error.jsp"><fmt:message key="nav.about" bundle="${lang}"/></a></li>
+    <li><a href="controller?command=about"><fmt:message key="nav.about" bundle="${lang}"/></a></li>
     <c:if test="${userRange == 0}">
         <li><a href="controller?command=admin"><fmt:message key="nav.administration" bundle="${lang}"/></a></li>
     </c:if>

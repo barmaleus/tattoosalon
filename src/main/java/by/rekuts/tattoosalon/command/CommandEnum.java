@@ -86,9 +86,9 @@ public enum CommandEnum {
             this.command = new AddArticleCommand();
         }
     },
-    UPLOADED {
+    CONFIRMATION {
         {
-            this.command = new PageUploadedCommand();
+            this.command = new PageConfirmationCommand();
         }
     },
     BLOCK_PUBLICATION {
@@ -99,6 +99,21 @@ public enum CommandEnum {
     ROLE_USER {
         {
             this.command = new ChangeUserRoleCommand();
+        }
+    },
+    ABOUT {
+        {
+            this.command = new PageAboutCommand();
+        }
+    },
+    APPOINTMENT {
+        {
+            this.command = new PageAppointmentCommand();
+        }
+    },
+    ORDER {
+        {
+            this.command = new OrderCommand();
         }
     };
     ActionCommand command;

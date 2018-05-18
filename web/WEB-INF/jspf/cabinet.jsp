@@ -50,7 +50,7 @@
             <br>
             Wroted comments: ${commentsSum}     <%--todo--%>
             <br>
-            <a href="controller?command=cabinet_block_user&userId=${uname.id}&uname=${uname.login}&blocked=${uname.blocked}">
+            <a href="controller?command=cabinet_block_user&userId=${uname.id}&uname=${uname.login}&blocked=${uname.blocked}" onclick="return confirm('Are you sure you want to delete this account?')">
                 <c:choose>
                     <c:when test="${uname.blocked}">
                         Restore account
@@ -88,9 +88,22 @@
                     ${uname.login} can't create publications.
                 </c:when>
             </c:choose>
-            <br>
-            Wroted comments: ${commentsSum}     <%--todo--%>
         </c:otherwise>
     </c:choose>
+
+
+    <%--<br>todo показывать пользователю его назначенные консультации--%>
+    <%--<br>--%>
+    <%--<c:if test="${(userRange == 0 && uname.userRole == 2) || (user == uname.login && uname.userRole == 2)}">--%>
+        <%--<c:forEach items="appointedCkientMeetings" var="appointment">--%>
+            <%--Назначено: ${appointment.appointmentType????}, мастер: ${appointment.masterId????}, дата: ${appointment.beginOfAppointment}.--%>
+        <%--</c:forEach>--%>
+    <%--</c:if>--%>
+    <%--<c:if test="${(userRange == 0 && uname.userRole == 1) || (user == uname.login && uname.userRole == 1)}">--%>
+        <%--<c:forEach items="appointedMasterMeetings" var="appointment">--%>
+            <%--Назначено: ${appointment.appointmentType???}, посетитель: ${appointment.clientId????}, дата: ${appointment.beginOfAppointment}.--%>
+        <%--</c:forEach>--%>
+    <%--</c:if>--%>
+
 </section>
 
