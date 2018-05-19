@@ -1,12 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<link type="text/css" href="${pageContext.request.contextPath}/css/prime.css" rel="stylesheet">
 <section>
-
-    <style>         <%--todo сменить расположение --%>
-        table, th, td {
-            border: 1px solid black;
-        }
-    </style>
 
     <h2>Online appointment</h2>
     Current date: <c:out value="${twoWeeksSinceToday[0]}"/>
@@ -56,7 +51,7 @@
 
     <c:choose>
         <c:when test="${masterId ne null}">
-            <table border="1" cellspacing="0" cellpadding="4">      <%--todo убрать настройки в css-файл --%>
+            <table id="appointment-table" >
                 <tr>
                     <th>&nbsp;</th>
                     <c:forEach items="${twoWeeksSinceToday}" var="day" varStatus="status">

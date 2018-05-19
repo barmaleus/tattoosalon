@@ -52,7 +52,7 @@
 
                         <div class="form-group">
                             <label><span class="req">* </span> Date of birth: <small>You must be elder than 16 years </small></label>
-                            <input required type="date" id="birth" name="reg-birth" min="1900-01-01" max="2018-05-01" onfocus="maxdate_validate()"> <%--todo dynamic change of max birthdate--%>
+                            <input required type="date" id="birth" name="reg-birth" min="1900-01-01" max="2018-05-01" onfocus="maxdate_validate()">
                         </div>
                         <div class="form-group">
                             <input class="btn btn-success" type="submit" name="submit_reg" value="Register">

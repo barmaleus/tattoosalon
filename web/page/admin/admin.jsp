@@ -7,10 +7,10 @@
 <html>
 <head>
     <title>Admin Page</title>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/administration.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/admin.js"></script>
     <link type="text/css" href="${pageContext.request.contextPath}/css/nav_and_header.css" rel="stylesheet">
     <link type="text/css" href="${pageContext.request.contextPath}/css/publication.css" rel="stylesheet">
-    <link type="text/css" href="${pageContext.request.contextPath}/css/administration.css" rel="stylesheet">
+    <link type="text/css" href="${pageContext.request.contextPath}/css/admin.css" rel="stylesheet">
     <link type="text/css" href="${pageContext.request.contextPath}/css/button.css" rel="stylesheet">
 </head>
 <body>
@@ -32,7 +32,7 @@
         <div class="panel">
             <c:choose>
             <c:when test="${publication.blocked}">
-                <form name="publicationform" action="controller" method="POST" id="publicationform">
+                <form class="admin-publicationform" name="publicationform" action="controller" method="POST" id="publicationform">
                     <input type="hidden" name="command" value="block_publication" />
                     <input type="hidden" name="publicationId" value="${publication.id}" />
                     <input type="hidden" name="blocked" value="${publication.blocked}" />
@@ -40,7 +40,7 @@
                 </form>
             </c:when>
             <c:otherwise>
-                <form name="publicationform" action="controller" method="POST" id="publicationform">
+                <form class="admin-publicationform" name="publicationform" action="controller" method="POST" id="publicationform">
                     <input type="hidden" name="command" value="block_publication" />
                     <input type="hidden" name="publicationId" value="${publication.id}" />
                     <input type="hidden" name="blocked" value="${publication.blocked}" />
@@ -55,7 +55,7 @@
     <h2>Users</h2>
     <br>
     <c:forEach items="${allUsers}" var="user" >
-        <button class="accordion" id="accordeonUserId${count.count}">${user.login}  —  Email: ${user.email}.  Role:
+        <button class="accordion" onclick="act_panel();" id="accordeonUserId${count.count}">${user.login}  —  Email: ${user.email}.  Role:
             <c:choose>
                 <c:when test="${user.userRole == 0}">
                     Administrator.
@@ -78,13 +78,13 @@
         <div class="panel">
             <c:choose>
                 <c:when test="${user.userRole == 0}">
-                    <form name="userroleform" action="controller" method="POST" id="userroleform">
+                    <form class="admin-usersform" name="userroleform" action="controller" method="POST" id="userroleform">
                         <input type="hidden" name="command" value="role_user" />
                         <input type="hidden" name="userId" value="${user.id}" />
                         <input type="hidden" name="operation" value="makeMaster" />
                         <input type="submit" name="user-role-button" value="Make Admin Master" />
                     </form>
-                    <form name="userroleform" action="controller" method="POST" id="userroleform">
+                    <form class="admin-usersform" name="userroleform" action="controller" method="POST" id="userroleform">
                         <input type="hidden" name="command" value="role_user" />
                         <input type="hidden" name="userId" value="${user.id}" />
                         <input type="hidden" name="operation" value="makeUser" />
@@ -92,13 +92,13 @@
                     </form>
                 </c:when>
                 <c:when test="${user.userRole == 1}">
-                    <form name="userroleform" action="controller" method="POST" id="userroleform">
+                    <form class="admin-usersform" name="userroleform" action="controller" method="POST" id="userroleform">
                         <input type="hidden" name="command" value="role_user" />
                         <input type="hidden" name="userId" value="${user.id}" />
                         <input type="hidden" name="operation" value="makeAdmin" />
                         <input type="submit" name="user-role-button" value="Make Master Admin" />
                     </form>
-                    <form name="userroleform" action="controller" method="POST" id="userroleform">
+                    <form class="admin-usersform" name="userroleform" action="controller" method="POST" id="userroleform">
                         <input type="hidden" name="command" value="role_user" />
                         <input type="hidden" name="userId" value="${user.id}" />
                         <input type="hidden" name="operation" value="makeUser" />
@@ -106,13 +106,13 @@
                     </form>
                 </c:when>
                 <c:otherwise>
-                    <form name="userroleform" action="controller" method="POST" id="userroleform">
+                    <form class="admin-usersform" name="userroleform" action="controller" method="POST" id="userroleform">
                         <input type="hidden" name="command" value="role_user" />
                         <input type="hidden" name="userId" value="${user.id}" />
                         <input type="hidden" name="operation" value="makeAdmin" />
                         <input type="submit" name="user-role-button" value="Make User Admin" />
                     </form>
-                    <form name="userroleform" action="controller" method="POST" id="userroleform">
+                    <form class="admin-usersform" name="userroleform" action="controller" method="POST" id="userroleform">
                         <input type="hidden" name="command" value="role_user" />
                         <input type="hidden" name="userId" value="${user.id}" />
                         <input type="hidden" name="operation" value="makeMaster" />
@@ -122,7 +122,7 @@
             </c:choose>
             <c:choose>
                 <c:when test="${user.blocked}">
-                    <form name="userform" action="controller" method="POST" id="userform">
+                    <form class="admin-usersform" name="userform" action="controller" method="POST" id="userform">
                         <input type="hidden" name="command" value="block_user" />
                         <input type="hidden" name="userId" value="${user.id}" />
                         <input type="hidden" name="blocked" value="${user.blocked}" />
@@ -130,7 +130,7 @@
                     </form>
                 </c:when>
                 <c:otherwise>
-                    <form name="userform" action="controller" method="POST" id="userform">
+                    <form class="admin-usersform" name="userform" action="controller" method="POST" id="userform">
                         <input type="hidden" name="command" value="block_user" />
                         <input type="hidden" name="userId" value="${user.id}" />
                         <input type="hidden" name="blocked" value="${user.blocked}" />
@@ -141,28 +141,21 @@
         </div>
     </c:forEach>
 
-<style>
-    form {
-        display: inline-block;
-    }
-</style>
+<script>                                                                   <%--todo import js doesn't work--%>
+var acc = document.getElementsByClassName("accordion");
+var i;
 
-
-<script>                                                                   <%--todo import js dont works--%>
-    var acc = document.getElementsByClassName("accordion");
-    var i;
-
-    for (i = 0; i < acc.length; i++) {
-        acc[i].addEventListener("click", function() {
-            this.classList.toggle("active");
-            var panel = this.nextElementSibling;
-            if (panel.style.maxHeight){
-                panel.style.maxHeight = null;
-            } else {
-                panel.style.maxHeight = panel.scrollHeight + "px";
-            }
-        });
-    }
+for (i = 0; i < acc.length; i++) {
+    acc[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var panel = this.nextElementSibling;
+        if (panel.style.maxHeight){
+            panel.style.maxHeight = null;
+        } else {
+            panel.style.maxHeight = panel.scrollHeight + "px";
+        }
+    });
+}
 </script>
 
 </section>

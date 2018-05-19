@@ -48,8 +48,6 @@
                 </c:when>
             </c:choose>
             <br>
-            Wroted comments: ${commentsSum}     <%--todo--%>
-            <br>
             <a href="controller?command=cabinet_block_user&userId=${uname.id}&uname=${uname.login}&blocked=${uname.blocked}" onclick="return confirm('Are you sure you want to delete this account?')">
                 <c:choose>
                     <c:when test="${uname.blocked}">

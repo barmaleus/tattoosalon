@@ -15,7 +15,7 @@ import java.time.temporal.ChronoUnit;
 public class OrderCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
-        boolean flag = false;
+        boolean flag;
         String page;
 
         Appointment appointment;

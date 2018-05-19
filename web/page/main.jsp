@@ -10,6 +10,7 @@
     <script src="${pageContext.request.contextPath}/js/prime.js"></script>
     <link type="text/css" href="${pageContext.request.contextPath}/css/nav_and_header.css" rel="stylesheet">
     <link type="text/css" href="${pageContext.request.contextPath}/css/publication.css" rel="stylesheet">
+    <link type="text/css" href="${pageContext.request.contextPath}/css/prime.css" rel="stylesheet">
 </head>
     <body>
     <%@include file="../WEB-INF/jspf/header.jspf"%>

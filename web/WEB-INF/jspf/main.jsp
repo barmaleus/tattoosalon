@@ -33,9 +33,6 @@
         </article>
     </c:forEach>
 
-<%--todo с главной, когда адрес controller не работает переход на вторую страницу, возможно, просто забить--%>
-
-
     <r:pager page="${results}" pageParam="page" />
 
 </section>
