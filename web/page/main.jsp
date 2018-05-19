@@ -7,6 +7,7 @@
 <html>
 <head>
     <title>Tattoo Salon</title>
+    <script src="${pageContext.request.contextPath}/js/prime.js"></script>
     <link type="text/css" href="${pageContext.request.contextPath}/css/nav_and_header.css" rel="stylesheet">
     <link type="text/css" href="${pageContext.request.contextPath}/css/publication.css" rel="stylesheet">
 </head>

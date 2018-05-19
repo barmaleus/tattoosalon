@@ -24,7 +24,7 @@
                 ${fileTypeError}
                 <br>
                 <span class="req">* </span> Image title:
-                <input required type="text" name="title" placeholder="Write photo title here" size="20" />
+                <input required type="text" name="title" onkeyup="validate_add_publication(this)" placeholder="Write photo title here" size="20" />
             <br>
             <br>
             <input type="submit" value="Upload" />

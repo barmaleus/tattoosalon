@@ -7,7 +7,7 @@
 <html lang="${language}">
 <head>
     <title>Tattoo Salon :: Login Page</title>
-
+    <script src="${pageContext.request.contextPath}/js/prime.js"></script>
     <link type="text/css" href="${pageContext.request.contextPath}/css/style_login.css" rel="stylesheet">
     <link type="text/css" href="${pageContext.request.contextPath}/css/button.css" rel="stylesheet">
 </head>
@@ -33,7 +33,7 @@
     <label>
         <fmt:message key="field.name" bundle="${lang}"/>
         <br>
-        <input type="text" name="login" value="" size="20" />
+        <input type="text" name="login" onkeyup = "Validate(this)" value="" size="20" />
     </label>
     <br>
     <label>
@@ -63,7 +63,7 @@
 </div><!-- end .container -->
 
 <footer class="footer">
-    Разработчик: Рекуть О.Ф. 2018г. IT-Academy - EPAM courses
+    <fmt:message key="login.footer" bundle="${lang}"/>
 </footer>
 
 </body>

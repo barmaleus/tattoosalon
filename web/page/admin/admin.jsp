@@ -7,7 +7,7 @@
 <html>
 <head>
     <title>Admin Page</title>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/administration.js"></script>  <!--todo import js dont works-->
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/administration.js"></script>
     <link type="text/css" href="${pageContext.request.contextPath}/css/nav_and_header.css" rel="stylesheet">
     <link type="text/css" href="${pageContext.request.contextPath}/css/publication.css" rel="stylesheet">
     <link type="text/css" href="${pageContext.request.contextPath}/css/administration.css" rel="stylesheet">

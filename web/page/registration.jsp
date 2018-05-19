@@ -2,17 +2,17 @@
 <html>
 <head>
     <title>Registration</title>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="${pageContext.request.contextPath}/js/registration.js"></script>
+    <script src="${pageContext.request.contextPath}/js/prime.js"></script>
     <link type="text/css" href="${pageContext.request.contextPath}/css/registration.css" rel="stylesheet">
     <link type="text/css" href="${pageContext.request.contextPath}/css/button.css" rel="stylesheet">
 </head>
 <body>
 <section>
     <div class="container">
-        <p>Registration form</p>
+        <h2>Registration form</h2>
         <div class="row">
             <div class="col-md-6">
                 <form action="" method="post" id="fileForm" role="form">
@@ -51,9 +51,8 @@
                         </div>
 
                         <div class="form-group">
-                            <label><span class="req">* </span> Date of birth: </label>
-                            <script>document.getElementById("birth").max = "2018-05-05";</script>
-                            <input required type="date" id="birth" name="reg-birth" min="1900-01-01" max="2018-05-01"> <%--todo dynamic change of max birthdate--%>
+                            <label><span class="req">* </span> Date of birth: <small>You must be elder than 16 years </small></label>
+                            <input required type="date" id="birth" name="reg-birth" min="1900-01-01" max="2018-05-01" onfocus="maxdate_validate()"> <%--todo dynamic change of max birthdate--%>
                         </div>
                         <div class="form-group">
                             <input class="btn btn-success" type="submit" name="submit_reg" value="Register">
