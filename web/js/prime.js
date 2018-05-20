@@ -29,10 +29,15 @@ function checkPass() {
     }
 }
 
-// validates text only  login.jsp, registration.jsp
+// validates text only at login.jsp, registration.jsp
 function Validate(txt) {
-    txt.value = txt.value.replace(/[^a-zA-Z-'\n\r.]+/g, '');
+    txt.value = txt.value.replace(/[^a-zA-Z0-9-'.]+/g, '');
 }
+
+        // validates text only at registration.jsp (name and surname)
+        function validate_name(txt) {
+            txt.value = txt.value.replace(/[^a-zA-Z0-9а-яА-Я-'.]+/g, '');
+        }
 
 // validate email
 function email_validate(email) {
@@ -66,5 +71,5 @@ function maxdate_validate() {
 
 // validates text only when adding publications (title and text itself) mailing to admin
 function validate_add_publication(txt) {
-    txt.value = txt.value.replace(/[^,.!?\-+:;*()%=_@а-яА-Яa-zA-Z-'\n\r.]+/g, '');     // &,<,>,",',\ at least are prohibited
+    txt.value = txt.value.replace(/[^,.!?+:;*()%=_@а-яА-Яa-zA-Z0-9-'\s\n\r.]+/g, '');     // &,<,>,",',\ at least are prohibited
 }

@@ -7,6 +7,8 @@ import java.time.LocalDateTime;
 public class SalonUser extends SalonEntity implements Serializable {
     private String login;
     private String password;
+    private String name;
+    private String surname;
     private String email;
     private boolean male;
     private int userRole;
@@ -22,11 +24,21 @@ public class SalonUser extends SalonEntity implements Serializable {
 
     public SalonUser() {
     }
-    public SalonUser(int id, String login, String password, String email, boolean male,
+
+    public SalonUser(int id, String login, String name, String surname) {
+        super(id);
+        this.login = login;
+        this.name = name;
+        this.surname = surname;
+    }
+
+    public SalonUser(int id, String login, String password, String name, String surname, String email, boolean male,
                      int userRole, LocalDateTime registration, LocalDate birth, boolean blocked) {
         super(id);
         this.login = login;
         this.password = password;
+        this.name = name;
+        this.surname = surname;
         this.email = email;
         this.userRole = userRole;
         this.male =  male;
@@ -35,18 +47,22 @@ public class SalonUser extends SalonEntity implements Serializable {
         this.blocked = blocked;
     }
 
-    public SalonUser(String login, String password, String email, boolean male, LocalDate birth) {
+    public SalonUser(String login, String password, String name, String surname, String email, boolean male, LocalDate birth) {
         this.login = login;
         this.password = password;
+        this.name = name;
+        this.surname = surname;
         this.email = email;
         this.male = male;
         this.birth = birth;
     }
 
-    public SalonUser(int userId, String login, String email, boolean male, int userRole, LocalDateTime registration, LocalDate birth, boolean blocked) {
+    public SalonUser(int userId, String login, String name, String surname, String email, boolean male, int userRole, LocalDateTime registration, LocalDate birth, boolean blocked) {
         super(userId);
         this.login = login;
         this.email = email;
+        this.name = name;
+        this.surname = surname;
         this.male = male;
         this.userRole = userRole;
         this.registration = registration;
@@ -76,6 +92,22 @@ public class SalonUser extends SalonEntity implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public boolean isMale() {

@@ -23,9 +23,11 @@ public class UpdatingUserDAO {
             preparedStatement = connection.prepareStatement(QueryToDatabase.INSERT_NEW_USER.getQuery());
             preparedStatement.setString(1, user.getLogin());
             preparedStatement.setString(2, user.getPassword());
-            preparedStatement.setString(3, user.getEmail());
-            preparedStatement.setBoolean(4, user.isMale());
-            preparedStatement.setDate(5, Date.valueOf(user.getBirth()));
+            preparedStatement.setString(3, user.getName());
+            preparedStatement.setString(4, user.getSurname());
+            preparedStatement.setString(5, user.getEmail());
+            preparedStatement.setBoolean(6, user.isMale());
+            preparedStatement.setDate(7, Date.valueOf(user.getBirth()));
             preparedStatement.executeUpdate();
             flag = true;
         } catch (SQLException e) {

@@ -7,6 +7,8 @@
             <br>
             Login: ${uname.login}
             <br>
+            Name: ${uname.name} ${uname.surname}
+            <br>
             Email: ${uname.email}
             <br>
             Gender: 

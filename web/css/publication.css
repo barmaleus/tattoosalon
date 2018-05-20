@@ -13,5 +13,14 @@ section {
     background-color: #eee;
 }
 
+.article-image img{
+    max-width: 400px;
+    max-height: 350px;
+}
+
+.article-full-image img{
+    max-width: 100%;
+}
+
 
 /*todo максимальный размер изображения в статье*/

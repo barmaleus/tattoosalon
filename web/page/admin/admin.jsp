@@ -17,7 +17,7 @@
 <%@include file="../../WEB-INF/jspf/header.jspf"%>
 <%@include file="../../WEB-INF/jspf/nav.jspf"%>
 <section>
-    <h2>Publications</h2>
+    <h2><fmt:message key="admin.publications" bundle="${lang}"/></h2>
     <br>
     <c:forEach items="${viewedPublications}" var="publication" >
         <button class="accordion" id="accordeonPubId${count.count}">${publication.title}  —  Author: ${publication.author}.  Published: ${publication.publishTime}.  Status:
@@ -55,7 +55,7 @@
     <h2>Users</h2>
     <br>
     <c:forEach items="${allUsers}" var="user" >
-        <button class="accordion" onclick="act_panel();" id="accordeonUserId${count.count}">${user.login}  —  Email: ${user.email}.  Role:
+        <button class="accordion" onclick="act_panel();" id="accordeonUserId${count.count}">Login: ${user.login}  —  Name: ${user.name} ${user.surname}. Email: ${user.email}.  Role:
             <c:choose>
                 <c:when test="${user.userRole == 0}">
                     Administrator.

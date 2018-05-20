@@ -2,23 +2,28 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <section>
     <c:forEach items="${masters}" var="master">
-        <div>
+        <div class="master-block">
             <p>
-                <a href="controller?command=gallery&page=0&master=${master}">
-                    <img src="../image/default.png" width="400" height="300" alt="${master}">
+                <a href="controller?command=gallery&page=0&master=${master.login}">
+                    <img src="../image/default.png" width="400" height="300" alt="${masterlogin}">
                 </a>
             </p>
-            <div>
-                <form action="#">
-                    <input type="submit" name="button" value="Отзывы">
+            <div class="master-button">
+                <form action="controller">
+                    <input type="hidden" name="command" value="masters">
+                    <input type="submit" name="button" onclick="return confirm('Reviews will be available soon!')" value="Отзывы">
                 </form>
             </div>
-            <div>
-                <form action="controller?command=gallery&page=0&master=${master}">
-                    <input type="submit" name="button" value="${master}">
+            <div class="master-button">
+                <form action="controller">
+                    <input type="hidden" name="command" value="gallery">
+                    <input type="hidden" name="page" value="0">
+                    <input type="hidden" name="master" value="${master.login}">
+                    <input type="submit" value="${master.name} ${master.surname}">
                 </form>
             </div>
         </div>
     </c:forEach>
+
     <%--todo place here masters with photos --%>
 </section>

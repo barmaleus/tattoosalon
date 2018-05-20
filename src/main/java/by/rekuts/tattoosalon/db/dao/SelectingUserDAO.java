@@ -17,6 +17,8 @@ public class SelectingUserDAO {
 
     private final static String COLUMN_LABEL_USER_ID = "userid";
     private final static String COLUMN_LABEL_LOGIN = "login";
+    private final static String COLUMN_LABEL_NAME = "name";
+    private final static String COLUMN_LABEL_SURNAME = "surname";
     private final static String COLUMN_LABEL_EMAIL = "email";
     private final static String COLUMN_LABEL_GENDER = "gender";
     private final static String COLUMN_LABEL_ROLE = "userrole";
@@ -38,13 +40,15 @@ public class SelectingUserDAO {
             while (resultSet.next()) {
                 int userId = resultSet.getInt(COLUMN_LABEL_USER_ID);
                 String login = resultSet.getString(COLUMN_LABEL_LOGIN);
+                String name = resultSet.getString(COLUMN_LABEL_NAME);
+                String surname = resultSet.getString(COLUMN_LABEL_SURNAME);
                 String email = resultSet.getString(COLUMN_LABEL_EMAIL);
                 boolean gender = resultSet.getBoolean(COLUMN_LABEL_GENDER);
                 int role = resultSet.getInt(COLUMN_LABEL_ROLE);
                 LocalDateTime register = resultSet.getTimestamp(COLUMN_LABEL_REGISTER).toLocalDateTime();
                 LocalDate birth = resultSet.getDate(COLUMN_LABEL_BIRTH).toLocalDate();
                 boolean blocked = resultSet.getBoolean(COLUMN_LABEL_BLOCKED);
-                user = new SalonUser(userId, login, email, gender, role, register, birth, blocked);
+                user = new SalonUser(userId, login, name, surname, email, gender, role, register, birth, blocked);
             }
         } catch (SQLException e) {
             LOGGER.log(Level.WARN, "Can't select user by his login. " + e);
@@ -58,18 +62,22 @@ public class SelectingUserDAO {
 
     /**Check masters from database to view them on masters.jsp page. */
 
-    public static ArrayList<String> selectMasters() {
+    public static ArrayList<SalonUser> selectMasters() {
         Connection connection = null;
         PreparedStatement preparedStatement;
         ResultSet resultSet;
-        ArrayList<String> masters = new ArrayList<>();
+        ArrayList<SalonUser> masters = new ArrayList<>();
         try {
             connection = ConnectionPool.getInstance().getConnection();
             preparedStatement = connection.prepareStatement(QueryToDatabase.SELECT_MASTERS.getQuery());
             preparedStatement.setInt(1, USER_MASTER_ROLE_ID);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                String master = resultSet.getString(COLUMN_LABEL_LOGIN);
+                int masterId = resultSet.getInt(COLUMN_LABEL_USER_ID);
+                String masterLogin = resultSet.getString(COLUMN_LABEL_LOGIN);
+                String masterName = resultSet.getString(COLUMN_LABEL_NAME);
+                String masterSurname = resultSet.getString(COLUMN_LABEL_SURNAME);
+                SalonUser master = new SalonUser(masterId, masterLogin, masterName, masterSurname);
                 masters.add(master);
             }
         } catch (SQLException e) {
@@ -116,13 +124,15 @@ public class SelectingUserDAO {
             while (resultSet.next()) {
                 int id = resultSet.getInt(COLUMN_LABEL_USER_ID);
                 String login = resultSet.getString(COLUMN_LABEL_LOGIN);
+                String name = resultSet.getString(COLUMN_LABEL_NAME);
+                String surname = resultSet.getString(COLUMN_LABEL_SURNAME);
                 String email = resultSet.getString(COLUMN_LABEL_EMAIL);
                 boolean male = resultSet.getBoolean(COLUMN_LABEL_GENDER);
                 int userRole = resultSet.getInt(COLUMN_LABEL_ROLE);
                 LocalDateTime register = resultSet.getTimestamp(COLUMN_LABEL_REGISTER).toLocalDateTime();
                 LocalDate birth = resultSet.getTimestamp(COLUMN_LABEL_BIRTH).toLocalDateTime().toLocalDate();
                 boolean blocked = resultSet.getBoolean(COLUMN_LABEL_BLOCKED);
-                SalonUser salonUser = new SalonUser(id, login, email, male, userRole, register, birth, blocked);
+                SalonUser salonUser = new SalonUser(id, login, name, surname, email, male, userRole, register, birth, blocked);
                 allUsers.add(salonUser);
             }
         } catch (SQLException e) {

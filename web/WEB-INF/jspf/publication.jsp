@@ -20,7 +20,7 @@
                         </p>
                     </c:when>
                     <c:otherwise>
-                        <div class="article-image">
+                        <div class="article-full-image">
                             <img src="../${publication.content}">
                         </div>
                     </c:otherwise>

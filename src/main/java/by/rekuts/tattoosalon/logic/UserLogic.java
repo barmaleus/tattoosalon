@@ -17,7 +17,7 @@ public class UserLogic {
         return CheckingUserDAO.checkUserRole(login);
     }
 
-    public static ArrayList<String> selectMasters() {
+    public static ArrayList<SalonUser> selectMasters() {
         return SelectingUserDAO.selectMasters();
     }
 

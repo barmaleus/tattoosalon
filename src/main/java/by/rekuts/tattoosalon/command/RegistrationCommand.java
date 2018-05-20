@@ -11,6 +11,8 @@ import java.time.LocalDate;
 public class RegistrationCommand implements ActionCommand {
     private static final String PARAM_NAME_REG_LOGIN = "reg-login";
     private static final String PARAM_NAME_REG_PASSWORD = "reg-password";
+    private static final String PARAM_NAME_REG_NAME = "reg-name";
+    private static final String PARAM_NAME_REG_SURNAME = "reg-surname";
     private static final String PARAM_NAME_REG_EMAIL = "reg-email";
     private static final String PARAM_NAME_REG_SEX = "reg-sex";
     private static final String PARAM_NAME_REG_BIRTH = "reg-birth";
@@ -22,6 +24,8 @@ public class RegistrationCommand implements ActionCommand {
         SalonUser user = new SalonUser();
         user.setLogin(request.getParameter(PARAM_NAME_REG_LOGIN));
         user.setPassword(request.getParameter(PARAM_NAME_REG_PASSWORD));
+        user.setName(request.getParameter(PARAM_NAME_REG_NAME));
+        user.setSurname(request.getParameter(PARAM_NAME_REG_SURNAME));
         user.setEmail(request.getParameter(PARAM_NAME_REG_EMAIL));
         user.setMale(Boolean.valueOf(request.getParameter(PARAM_NAME_REG_SEX)));
         user.setBirth(LocalDate.parse(request.getParameter(PARAM_NAME_REG_BIRTH)));

@@ -14,7 +14,7 @@
             <c:forEach items="${masters}" var="master">
                 <c:choose>
                     <c:when test="${masterId eq master.id}">
-                        ${master.login}
+                        ${master.name} ${master.surname}
                     </c:when>
                 </c:choose>
             </c:forEach>
@@ -28,7 +28,7 @@
                 <c:when test="${masterId == null}">
                     <option selected disabled>Choose master</option>
                     <c:forEach items="${masters}" var="master">
-                        <option value="${master.id}">${master.login}</option>
+                        <option value="${master.id}">${master.name} ${master.surname}</option>
                     </c:forEach>
                 </c:when>
                 <c:otherwise>
@@ -36,10 +36,10 @@
                     <c:forEach items="${masters}" var="master">
                         <c:choose>
                             <c:when test="${masterId eq master.id}">
-                                <option selected value="${master.id}">${master.login}</option>
+                                <option selected value="${master.id}">${master.name} ${master.surname}</option>
                             </c:when>
                             <c:otherwise>
-                                <option value="${master.id}">${master.login}</option>
+                                <option value="${master.id}">${master.name} ${master.surname}</option>
                             </c:otherwise>
                         </c:choose>
                     </c:forEach>

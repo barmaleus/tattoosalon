@@ -20,9 +20,19 @@
                     <fieldset><legend class="text-center">Valid information is required to register. <span class="req"><small> required *</small></span></legend>
 
                         <div class="form-group">
-                            <label for="username"><span class="req">* </span> User name:  <small>This will be your login user name</small> </label>
-                            <input class="form-control" type="text" name="reg-login" id = "username" minlength="4" maxlength="16" onkeyup = "Validate(this)" placeholder="minimum 4 letters" required />
+                            <label for="login"><span class="req">* </span> Login:  <small>This will be your login</small> </label>
+                            <input class="form-control" type="text" name="reg-login" id = "login" minlength="4" maxlength="16" onkeyup = "Validate(this)" placeholder="minimum 4 letters" required />
                             ${errorLoginExists}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="name"><span class="req">* </span> Name: </label>
+                            <input class="form-control" type="text" name="reg-name" id = "name" minlength="2" maxlength="20" onkeyup = "validate_name(this)" placeholder="Enter your name here" required />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="surname"><span class="req">* </span> Surname: </label>
+                            <input class="form-control" type="text" name="reg-surname" id = "surname" minlength="2" maxlength="20" onkeyup = "validate_name(this)" placeholder="Enter your surname" required />
                         </div>
 
                         <div class="form-group">

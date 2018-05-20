@@ -3,7 +3,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
 <%@ page pageEncoding="UTF-8" %>
 <section>
-
     <c:forEach items="${viewedPublications}" var="publication">
         <article>
             <header class="article-header">

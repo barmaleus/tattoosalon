@@ -103,12 +103,7 @@ public class PageAppointmentCommand implements ActionCommand {
 
         /** 'masters' - list of masters for choosing at page. */
 
-        ArrayList<String> masterNames = UserLogic.selectMasters();
-        ArrayList<SalonUser> masters = new ArrayList<>();
-        for (int i = 0; i < masterNames.size(); i++) {
-            SalonUser master = UserLogic.loadPersonalData(masterNames.get(i));
-            masters.add(master);
-        }
+        ArrayList<SalonUser> masters = UserLogic.selectMasters();
         request.setAttribute("masters", masters);
 
         request.setAttribute("twoWeeksSinceToday", twoWeeksSinceToday);
