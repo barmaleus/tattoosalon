@@ -20,13 +20,16 @@
     <h2><fmt:message key="admin.publications" bundle="${lang}"/></h2>
     <br>
     <c:forEach items="${viewedPublications}" var="publication" >
-        <button class="accordion" id="accordeonPubId${count.count}">${publication.title}  —  Author: ${publication.author}.  Published: ${publication.publishTime}.  Status:
+        <button class="accordion" id="accordeonPubId${count.count}">${publication.title}  —
+            <fmt:message key="admin.author" bundle="${lang}"/>: ${publication.author}.
+            <fmt:message key="admin.published" bundle="${lang}"/>: ${publication.publishTime}.
+            <fmt:message key="admin.status" bundle="${lang}"/>:
             <c:choose>
             <c:when test="${publication.blocked}">
-                Blocked.
+                <fmt:message key="admin.blocked" bundle="${lang}"/>.
             </c:when>
             <c:otherwise>
-                Active.
+                <fmt:message key="admin.active" bundle="${lang}"/>.
             </c:otherwise>
         </c:choose></button>
         <div class="panel">
@@ -36,7 +39,7 @@
                     <input type="hidden" name="command" value="block_publication" />
                     <input type="hidden" name="publicationId" value="${publication.id}" />
                     <input type="hidden" name="blocked" value="${publication.blocked}" />
-                    <input type="submit" name="pub-block-button" value="Unblock publication" />
+                    <input type="submit" name="pub-block-button" value="<fmt:message key="admin.unblock.publication" bundle="${lang}"/>" />
                 </form>
             </c:when>
             <c:otherwise>
@@ -44,7 +47,7 @@
                     <input type="hidden" name="command" value="block_publication" />
                     <input type="hidden" name="publicationId" value="${publication.id}" />
                     <input type="hidden" name="blocked" value="${publication.blocked}" />
-                    <input type="submit" name="pub-block-button" value="Block publication" />
+                    <input type="submit" name="pub-block-button" value="<fmt:message key="admin.block.publication" bundle="${lang}"/>" />
                 </form>
             </c:otherwise>
             </c:choose>
@@ -52,27 +55,31 @@
     </c:forEach>
 
     <br>
-    <h2>Users</h2>
+    <h2><fmt:message key="admin.users" bundle="${lang}"/></h2>
     <br>
     <c:forEach items="${allUsers}" var="user" >
-        <button class="accordion" onclick="act_panel();" id="accordeonUserId${count.count}">Login: ${user.login}  —  Name: ${user.name} ${user.surname}. Email: ${user.email}.  Role:
+        <button class="accordion" onclick="act_panel();" id="accordeonUserId${count.count}">
+            <fmt:message key="admin.login" bundle="${lang}"/>: ${user.login}  —
+            <fmt:message key="admin.name" bundle="${lang}"/>: ${user.name} ${user.surname}. Email: ${user.email}.
+            <fmt:message key="admin.role" bundle="${lang}"/>:
             <c:choose>
                 <c:when test="${user.userRole == 0}">
-                    Administrator.
+                    <fmt:message key="admin.administrator" bundle="${lang}"/>.
                 </c:when>
                 <c:when test="${user.userRole == 1}">
-                    Master.
+                    <fmt:message key="admin.master" bundle="${lang}"/>.
                 </c:when>
                 <c:otherwise>
-                    User.
+                    <fmt:message key="admin.user" bundle="${lang}"/>.
                 </c:otherwise>
-            </c:choose> Registered: ${user.registration}. Status:
+            </c:choose> <fmt:message key="admin.registered" bundle="${lang}"/>: ${user.registration}.
+            <fmt:message key="admin.status" bundle="${lang}"/>:
             <c:choose>
                 <c:when test="${user.blocked}">
-                    Blocked.
+                    <fmt:message key="admin.blocked" bundle="${lang}"/>.
                 </c:when>
                 <c:otherwise>
-                    Active.
+                    <fmt:message key="admin.active" bundle="${lang}"/>.
                 </c:otherwise>
             </c:choose></button>
         <div class="panel">
@@ -82,13 +89,13 @@
                         <input type="hidden" name="command" value="role_user" />
                         <input type="hidden" name="userId" value="${user.id}" />
                         <input type="hidden" name="operation" value="makeMaster" />
-                        <input type="submit" name="user-role-button" value="Make Admin Master" />
+                        <input type="submit" name="user-role-button" value="<fmt:message key="admin.makeadminmaster" bundle="${lang}"/>" />
                     </form>
                     <form class="admin-usersform" name="userroleform" action="controller" method="POST" id="userroleform">
                         <input type="hidden" name="command" value="role_user" />
                         <input type="hidden" name="userId" value="${user.id}" />
                         <input type="hidden" name="operation" value="makeUser" />
-                        <input type="submit" name="user-role-button" value="Make Admin User" />
+                        <input type="submit" name="user-role-button" value="<fmt:message key="admin.makeadminuser" bundle="${lang}"/>" />
                     </form>
                 </c:when>
                 <c:when test="${user.userRole == 1}">
@@ -96,13 +103,13 @@
                         <input type="hidden" name="command" value="role_user" />
                         <input type="hidden" name="userId" value="${user.id}" />
                         <input type="hidden" name="operation" value="makeAdmin" />
-                        <input type="submit" name="user-role-button" value="Make Master Admin" />
+                        <input type="submit" name="user-role-button" value="<fmt:message key="admin.makemasteradmin" bundle="${lang}"/>" />
                     </form>
                     <form class="admin-usersform" name="userroleform" action="controller" method="POST" id="userroleform">
                         <input type="hidden" name="command" value="role_user" />
                         <input type="hidden" name="userId" value="${user.id}" />
                         <input type="hidden" name="operation" value="makeUser" />
-                        <input type="submit" name="user-role-button" value="Make Master User" />
+                        <input type="submit" name="user-role-button" value="<fmt:message key="admin.makemasteruser" bundle="${lang}"/>" />
                     </form>
                 </c:when>
                 <c:otherwise>
@@ -110,13 +117,13 @@
                         <input type="hidden" name="command" value="role_user" />
                         <input type="hidden" name="userId" value="${user.id}" />
                         <input type="hidden" name="operation" value="makeAdmin" />
-                        <input type="submit" name="user-role-button" value="Make User Admin" />
+                        <input type="submit" name="user-role-button" value="<fmt:message key="admin.makeuseradmin" bundle="${lang}"/>" />
                     </form>
                     <form class="admin-usersform" name="userroleform" action="controller" method="POST" id="userroleform">
                         <input type="hidden" name="command" value="role_user" />
                         <input type="hidden" name="userId" value="${user.id}" />
                         <input type="hidden" name="operation" value="makeMaster" />
-                        <input type="submit" name="user-role-button" value="Make User Master" />
+                        <input type="submit" name="user-role-button" value="<fmt:message key="admin.makeusermaster" bundle="${lang}"/>" />
                     </form>
                 </c:otherwise>
             </c:choose>
@@ -126,7 +133,7 @@
                         <input type="hidden" name="command" value="block_user" />
                         <input type="hidden" name="userId" value="${user.id}" />
                         <input type="hidden" name="blocked" value="${user.blocked}" />
-                        <input type="submit" name="user-block-button" value="Unblock user" />
+                        <input type="submit" name="user-block-button" value="<fmt:message key="admin.unblock.user" bundle="${lang}"/>" />
                     </form>
                 </c:when>
                 <c:otherwise>
@@ -134,7 +141,7 @@
                         <input type="hidden" name="command" value="block_user" />
                         <input type="hidden" name="userId" value="${user.id}" />
                         <input type="hidden" name="blocked" value="${user.blocked}" />
-                        <input type="submit" name="user-block-button" value="Block user" />
+                        <input type="submit" name="user-block-button" value="<fmt:message key="admin.block.user" bundle="${lang}"/>" />
                     </form>
                 </c:otherwise>
             </c:choose>

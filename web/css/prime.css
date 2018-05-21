@@ -1,3 +1,7 @@
+body {
+    background-color: #EEE;
+}
+
 #appointment-table {
     border-collapse: collapse;
 }
@@ -18,3 +22,21 @@
     padding: 5px;
     margin: 15px;
 }
+
+/*error.jsp*/
+#error-img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
+
+#error-data {
+    font: 100%/1.4 Verdana, Arial, Helvetica, sans-serif;
+    width: 633px;
+    background-color: #FFF;
+    margin: 0px auto;
+    padding: 20px;
+    height:800px;
+}
+
+
