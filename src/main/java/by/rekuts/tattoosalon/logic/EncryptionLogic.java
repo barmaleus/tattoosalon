@@ -4,8 +4,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class EncryptionLogic {
-    // We need a bytesToHex method first. So, from -
-    // http://stackoverflow.com/a/9855338/2970947
+    // We need a bytesToHex method first
     final protected static char[] hexArray = "0123456789ABCDEF".toCharArray();
 
     public static String bytesToHex(byte[] bytes) {
@@ -19,7 +18,7 @@ public class EncryptionLogic {
         return new String(hexChars);
     }
 
-    // Change this to something else.
+    // May change this to something else.
     private static String SALT = "AgBYr17z";
 
     // A password hashing method.

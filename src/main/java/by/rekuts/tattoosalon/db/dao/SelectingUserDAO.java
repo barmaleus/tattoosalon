@@ -10,7 +10,6 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class SelectingUserDAO {
     private static final Logger LOGGER = LogManager.getLogger(SelectingUserDAO.class.getName());
@@ -138,7 +137,7 @@ public class SelectingUserDAO {
         } catch (SQLException e) {
             LOGGER.log(Level.WARN, "Can't select all publications in database. " + e);
         } finally {
-            //выводить в последние новости первыми
+            // display the latest news first
             allUsers.sort((o1, o2) -> o2.getRegistration().compareTo(o1.getRegistration()));
             if (connection != null) {
                 ConnectionPool.getInstance().returnConnectionToPool(connection);

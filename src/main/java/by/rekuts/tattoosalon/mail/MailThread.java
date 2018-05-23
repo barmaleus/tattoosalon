@@ -29,14 +29,14 @@ public class MailThread extends Thread {
         this.properties = properties;
     }
     private void init() {
-//объект почтовой сессии
+//mail session object
         Session mailSession = (new SessionCreator(properties)).createSession();
         mailSession.setDebug(true);
-// создание объекта почтового сообщения
+// creating mail message object
         message = new MimeMessage(mailSession);
         try
         {
-// загрузка параметров в объект почтового сообщения
+// loading parameters to mail message object
             message.setSubject(userName + ", tattoparlor site: " + mailSubject);
             message.setContent(mailText,"text/html");
             message.setRecipient(Message.RecipientType.TO, new InternetAddress(SEND_TO_EMAIL));
@@ -53,7 +53,7 @@ public class MailThread extends Thread {
         init();
         try
         {
-// отправка почтового сообщения
+// sending mail message
             Transport.send(message);
         }
         catch (MessagingException e) {

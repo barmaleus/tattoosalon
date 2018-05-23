@@ -7,7 +7,6 @@
 <html>
 <head>
     <title>Admin Page</title>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/admin.js"></script>
     <link type="text/css" href="${pageContext.request.contextPath}/css/nav_and_header.css" rel="stylesheet">
     <link type="text/css" href="${pageContext.request.contextPath}/css/publication.css" rel="stylesheet">
     <link type="text/css" href="${pageContext.request.contextPath}/css/admin.css" rel="stylesheet">
@@ -58,7 +57,7 @@
     <h2><fmt:message key="admin.users" bundle="${lang}"/></h2>
     <br>
     <c:forEach items="${allUsers}" var="user" >
-        <button class="accordion" onclick="act_panel();" id="accordeonUserId${count.count}">
+        <button class="accordion" id="accordeonUserId${count.count}">
             <fmt:message key="admin.login" bundle="${lang}"/>: ${user.login}  —
             <fmt:message key="admin.name" bundle="${lang}"/>: ${user.name} ${user.surname}. Email: ${user.email}.
             <fmt:message key="admin.role" bundle="${lang}"/>:
@@ -148,7 +147,7 @@
         </div>
     </c:forEach>
 
-<script>                                                                   <%--todo import js doesn't work--%>
+<script>
 var acc = document.getElementsByClassName("accordion");
 var i;
 

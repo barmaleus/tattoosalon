@@ -22,17 +22,17 @@ public class SendMailCommand implements ActionCommand {
         ServletContext context = request.getServletContext();
         HttpSession session = request.getSession();
         String fileName = context.getInitParameter("mail");
-// загрузка параметров почтового сервера в объект свойств
+        // load parameters of the mail server into a property object
         try {
             properties.load(context.getResourceAsStream(fileName));
         } catch (IOException e) {
             LOGGER.log(Level.WARN, "Properties couldn't be load");
         }
-        MailThread mailOperator = new MailThread(session.getAttribute("user").toString(), request.getParameter("subject"), request.getParameter("body"),properties);
-        // TODO attribute user could be "" if user is out of session - validate this
-        // запуск процесса отправки письма в отдельном потоке
+        MailThread mailOperator = new MailThread(session.getAttribute("user").toString(), request.getParameter("subject"),
+                request.getParameter("body"),properties);
+        // start the process of sending a message in a separate thread
         mailOperator.start();
-// переход на страницу с предложением о создании нового письма
+
         page = ConfigurationManager.getProperty("path.page.send");
         return page;
     }

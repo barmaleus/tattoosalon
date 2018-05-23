@@ -13,6 +13,8 @@ public class Appointment extends SalonEntity implements Serializable {
     private LocalDateTime timeOfOrder;
     private int appointmentStatus;
 
+    /* Some appointment types and statuses are not realized in this version of program, but it may be realized in later versions */
+
     public enum appointmentType {
         CONSULTATION,
         TATTOOING,
@@ -41,7 +43,7 @@ public class Appointment extends SalonEntity implements Serializable {
         this.appointmentStatus = appointmentStatus;
     }
 
-    /** constructor without appointmentId. It is necessary for registration appointment in database. Id is assigned automatically. */
+    /* constructor without appointmentId. It is necessary for registration appointment in database. Id is assigned automatically. */
 
     public Appointment(int appointmentType, int masterId, int clientId, LocalDateTime beginOfAppointment,
                        LocalDateTime endOfAppointment, LocalDateTime timeOfOrder, int appointmentStatus) {

@@ -19,7 +19,7 @@ public class PageAdminCommand implements ActionCommand {
             request.setAttribute("viewedPublications", viewedPublications);
             ArrayList<SalonUser> allUsers = UserLogic.selectAllUsers();
             request.setAttribute("allUsers", allUsers);
-            return ConfigurationManager.getProperty("path.page.admin");     //TODO можно ли изменить имя юзера в сессии вручную? является ли проверка достаточной?
+            return ConfigurationManager.getProperty("path.page.admin");
         } else {
             request.setAttribute("errorLoginPassMessage", MessageManager.getProperty("message.norightsadmin"));
             String page = ConfigurationManager.getProperty("path.page.login");

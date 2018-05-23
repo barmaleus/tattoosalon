@@ -23,22 +23,22 @@ public class Controller extends javax.servlet.http.HttpServlet {
     }
     private void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String page = null;
-        // определение команды, пришедшей из JSP
+        String page;
+        // define the command that came from the JSP
         ActionFactory client = new ActionFactory();
         ActionCommand command = client.defineCommand(request);
         /*
-        * вызов реализованного метода execute() и передача параметров
-        * классу-обработчику конкретной команды
+         * call the implemented execute () method and pass parameters
+         * to class-processor of a specific command
         */
         page = command.execute(request);
-        // метод возвращает страницу ответа
+        // method returns a response page
         if (page != null) {
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(page);
-            // вызов страницы ответа на запрос
+            // call a response page to the request
             dispatcher.forward(request, response);
         } else {
-            // установка страницы c cообщением об ошибке
+            // setting up a page with an error message
             page = ConfigurationManager.getProperty("path.page.index");
             request.getSession().setAttribute("nullPage", MessageManager.getProperty("message.nullpage"));
             response.sendRedirect(request.getContextPath() + page);

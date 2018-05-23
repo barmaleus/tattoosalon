@@ -12,5 +12,3 @@
         <li><a href="controller?command=admin"><fmt:message key="nav.administration" bundle="${lang}"/></a></li>
     </c:if>
 </ul>
-
-<%-- TODO навигационная панель не прокручивается вверх, а хедер прокручивается. исправить если будет время--%>

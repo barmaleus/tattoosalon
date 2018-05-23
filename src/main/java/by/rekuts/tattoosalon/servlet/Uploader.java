@@ -22,16 +22,14 @@ import java.util.regex.Pattern;
         maxFileSize=1024*1024*2,      // 2MB
         maxRequestSize=1024*1024*10)   // 10MB
 public class Uploader extends HttpServlet {
-    /**
-     * Name of the directory where uploaded files will be saved, relative to
-     * the web application directory.
-     */
+
+     /* Name of the directory where uploaded files will be saved, relative to
+     * the web application directory.*/
+
     private static final String SAVE_DIR = "image/gallery";
     private static String relatedDirAndFilePath = null;
 
-    /**
-     * handles file upload
-     */
+    /* handles file upload */
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response) throws ServletException, IOException {
 
@@ -43,11 +41,11 @@ public class Uploader extends HttpServlet {
         String fileName = getFileName(filePart);
         String savePath = request.getServletContext().getRealPath("") + SAVE_DIR;
 
-        /** Validating of image type */
+        /* Validating of image type */
         if (fileName.endsWith(".jpg") || fileName.endsWith(".gif") || fileName.endsWith(".png")
                 || fileName.endsWith(".JPG") || fileName.endsWith(".GIF") || fileName.endsWith(".PNG")) {
 
-            /** Validating of avoiding rewriting image file*/
+            /* Validating of avoiding rewriting image file*/
 
             File savingFilePath = new File(savePath + File.separator + fileName);
             while (savingFilePath.exists()) {
@@ -111,9 +109,7 @@ public class Uploader extends HttpServlet {
         }
     }
 
-    /**
-     * Extracts file name from HTTP header content-disposition
-     */
+    /* Extracts file name from HTTP header content-disposition */
 
     private String getFileName(final Part part) {
         for (String content : part.getHeader("content-disposition").split(";")) {

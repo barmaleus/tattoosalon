@@ -24,6 +24,4 @@
             </div>
         </div>
     </c:forEach>
-
-    <%--todo place here masters with photos --%>
 </section>

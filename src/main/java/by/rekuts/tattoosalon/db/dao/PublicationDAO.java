@@ -9,7 +9,6 @@ import org.apache.logging.log4j.Logger;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class PublicationDAO {
     private static final Logger LOGGER = LogManager.getLogger(PublicationDAO.class.getName());
@@ -45,7 +44,7 @@ public class PublicationDAO {
         } catch (SQLException e) {
             LOGGER.log(Level.WARN, "Can't select all publications in database. " + e);
         } finally {
-            //выводить в последние новости первыми
+            // display the latest news first
             publicationList.sort((o1, o2) -> o2.getPublishTime().compareTo(o1.getPublishTime()));
             if (connection != null) {
                 ConnectionPool.getInstance().returnConnectionToPool(connection);

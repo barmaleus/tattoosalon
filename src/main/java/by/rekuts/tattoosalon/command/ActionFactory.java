@@ -12,7 +12,7 @@ public class ActionFactory {
         if (action == null || action.isEmpty()) {
             return current;
         }
-        // получение объекта, соответствующего команде
+        // get the object which is corresponding to the command
         try {
             CommandEnum currentEnum = CommandEnum.valueOf(action.toUpperCase());
             current = currentEnum.getCurrentCommand();

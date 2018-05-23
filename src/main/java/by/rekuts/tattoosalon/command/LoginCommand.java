@@ -20,17 +20,15 @@ public class LoginCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
         String page;
-        // извлечение из запроса логина и пароля
         String login = request.getParameter(PARAM_NAME_LOGIN);
         String pass = request.getParameter(PARAM_NAME_PASSWORD);
-        // проверка логина и пароля
         if (LoginLogic.checkLogin(login, pass)) {
             SalonUser user = UserLogic.loadPersonalData(login);
             if(!user.isBlocked()) {
                 HttpSession session = request.getSession();
                 session.setAttribute("salonUser", user);
-                session.setAttribute("user", login);                                        //todo заменить на salonUser
-                session.setAttribute("userRange", UserLogic.checkUserRole(login));                 //todo заменить на salonUser
+                session.setAttribute("user", login);
+                session.setAttribute("userRange", UserLogic.checkUserRole(login));
                 ArrayList<Publication> allPublications = PublicationLogic.viewAllUnblockedPublications();
                 request.setAttribute("allPublications", allPublications);
                 ListPage<Publication> results = new ListPage<>(allPublications, 0, allPublications.size(), 3);
