@@ -18,8 +18,8 @@ public enum QueryToDatabase {
     UPDATE_PUBLICATION_BLOCKED("UPDATE publication SET blocked = ? WHERE id_publication = ?"),
     INSERT_NEW_APPOINTMENT("INSERT INTO appointment (appointment_type, master_id, client_id, begining_time, ending_time, ordering_time, status) VALUES (?, ?, ?, ?, ?, ?, ?)"),
     SELECT_APPOINTMENTS_BY_MASTER_ID("SELECT appointment_id, appointment_type, master_id, client_id, begining_time, ending_time, ordering_time, status FROM appointment WHERE master_id = ?"),
-    SELECT_APPOINTMENTS_BY_MASTER_ID_FOR_NEX_14_DAYS("SELECT appointment_id, appointment_type, master_id, client_id, begining_time, ending_time, ordering_time, status FROM appointment WHERE master_id = ? AND begining_time BETWEEN current_timestamp AND date_add(current_timestamp,interval 14 day)"),
-    SELECT_APPOINTMENTS_BY_CLIENT_ID_FOR_NEX_14_DAYS("SELECT appointment_id, appointment_type, master_id, client_id, begining_time, ending_time, ordering_time, status FROM appointment WHERE client_id = ? AND begining_time BETWEEN current_timestamp AND date_add(current_timestamp,interval 14 day)");
+    SELECT_APPOINTMENTS_BY_MASTER_ID_FOR_NEX_14_DAYS("SELECT appointment_id, appointment_type, master_id, client_id, begining_time, ending_time, ordering_time, status FROM appointment WHERE master_id = ? AND begining_time BETWEEN current_timestamp AND date_add(current_timestamp,interval 14 day) ORDER BY begining_time"),
+    SELECT_APPOINTMENTS_BY_CLIENT_ID_FOR_NEX_14_DAYS("SELECT appointment_id, appointment_type, master_id, client_id, begining_time, ending_time, ordering_time, status FROM appointment WHERE client_id = ? AND begining_time BETWEEN current_timestamp AND date_add(current_timestamp,interval 14 day) ORDER BY begining_time");
 
     private final String query;
     QueryToDatabase(String query) {

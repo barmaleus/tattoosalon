@@ -91,19 +91,105 @@
         </c:otherwise>
     </c:choose>
 
+    <%--List of appointments to masters like a client.--%>
 
-    <%--<br>todo показывать пользователю его назначенные консультации--%>
-    <%--<br>--%>
-    <%--<c:if test="${(userRange == 0 && uname.userRole == 2) || (user == uname.login && uname.userRole == 2)}">--%>
-        <%--<c:forEach items="appointedCkientMeetings" var="appointment">--%>
-            <%--Назначено: ${appointment.appointmentType????}, мастер: ${appointment.masterId????}, дата: ${appointment.beginOfAppointment}.--%>
-        <%--</c:forEach>--%>
-    <%--</c:if>--%>
-    <%--<c:if test="${(userRange == 0 && uname.userRole == 1) || (user == uname.login && uname.userRole == 1)}">--%>
-        <%--<c:forEach items="appointedMasterMeetings" var="appointment">--%>
-            <%--Назначено: ${appointment.appointmentType???}, посетитель: ${appointment.clientId????}, дата: ${appointment.beginOfAppointment}.--%>
-        <%--</c:forEach>--%>
-    <%--</c:if>--%>
+    <br>
+    <br>
+    <br>
+<c:if test="${uname.id == salonUser.id || salonUser.userRole == 0}"> <%--Only admin may see everybody's appointments and every user their own ones.--%>
+    Appointed:
+    <c:if test="${empty appointedClientMeetings}">
+        None.
+    </c:if>
+    <br>
+    <c:forEach items="${appointedClientMeetings}" var="appointment">
+            Time: ${appointment.beginOfAppointment},
+            master:
+        <c:forEach items="${users}" var="master">
+            <c:if test="${master.id == appointment.masterId}">
+                ${master.name} ${master.surname}
+            </c:if>
+        </c:forEach>,
+            type of appointment:
+            <c:choose>
+                <c:when test="${appointment.appointmentType == 0}">
+                    consultation
+                </c:when>
+                <c:when test="${appointment.appointmentType == 1}">
+                    tattooing
+                </c:when>
+                <c:when test="${appointment.appointmentType == 2}">
+                    piercing
+                </c:when>
+                <c:when test="${appointment.appointmentType == 3}">
+                    premanent makeup
+                </c:when>
+            </c:choose>,
+            status:
+            <c:choose>
+                <c:when test="${appointment.appointmentStatus == 0}">
+                    appointed
+                </c:when>
+                <c:when test="${appointment.appointmentStatus == 1}">
+                    canceled
+                </c:when>
+                <c:when test="${appointment.appointmentType == 2}">
+                    failure to attend
+                </c:when>
+            </c:choose>.
+            <br>
+    </c:forEach>
+</c:if>
+
+    <%-- List of master's appointments. Admin sees all of them, masters - only their own appointments. --%>
+
+    <br>
+    <br>
+    <c:if test="${uname.id == salonUser.id && uname.userRole == 1 || salonUser.userRole == 0 && uname.userRole == 1}">
+        <br>
+        Appointed clients:
+        <c:if test="${empty appointedMasterMeetings}">
+            None.
+        </c:if>
+        <br>
+        <c:forEach items="${appointedMasterMeetings}" var="appointment">
+            Time: ${appointment.beginOfAppointment},
+            client:
+            <c:forEach items="${users}" var="client">
+                <c:if test="${client.id == appointment.clientId}">
+                    ${client.name} ${client.surname}
+                </c:if>
+            </c:forEach>,
+            type of appointment:
+            <c:choose>
+                <c:when test="${appointment.appointmentType == 0}">
+                    consultation
+                </c:when>
+                <c:when test="${appointment.appointmentType == 1}">
+                    tattooing
+                </c:when>
+                <c:when test="${appointment.appointmentType == 2}">
+                    piercing
+                </c:when>
+                <c:when test="${appointment.appointmentType == 3}">
+                    premanent makeup
+                </c:when>
+            </c:choose>,
+            status:
+            <c:choose>
+                <c:when test="${appointment.appointmentStatus == 0}">
+                    appointed
+                </c:when>
+                <c:when test="${appointment.appointmentStatus == 1}">
+                    canceled
+                </c:when>
+                <c:when test="${appointment.appointmentType == 2}">
+                    failure to attend
+                </c:when>
+            </c:choose>.
+            <br>
+        </c:forEach>
+    </c:if>
 
 </section>
 

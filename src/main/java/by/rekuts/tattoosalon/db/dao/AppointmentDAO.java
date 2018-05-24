@@ -51,26 +51,12 @@ public class AppointmentDAO {
     public static ArrayList<Appointment> selectAppointmentsByMasterId(int masterId) {
         Connection connection = null;
         PreparedStatement preparedStatement;
-        ResultSet resultSet;
         ArrayList<Appointment> appointments = new ArrayList<>();
         try {
             connection = ConnectionPool.getInstance().getConnection();
             preparedStatement = connection.prepareStatement(QueryToDatabase.SELECT_APPOINTMENTS_BY_MASTER_ID.getQuery());
             preparedStatement.setInt(1, masterId);
-            resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                int appointmentId = resultSet.getInt(COLUMN_LABEL_APPOINTMENT_ID);
-                int appointmentType = resultSet.getInt(COLUMN_LABEL_APPOINTMENT_TYPE);
-                int appointmentMasterId = resultSet.getInt(COLUMN_LABEL_MASTER_ID);
-                int clientId = resultSet.getInt(COLUMN_LABEL_CLIENT_ID);
-                LocalDateTime appointmentBeginingTime = resultSet.getTimestamp(COLUMN_LABEL_BEGINING_TIME).toLocalDateTime();
-                LocalDateTime appointmentEndingTime = resultSet.getTimestamp(COLUMN_LABEL_ENDING_TIME).toLocalDateTime();
-                LocalDateTime appointmentOrderingTime = resultSet.getTimestamp(COLUMN_LABEL_ORDERING_TIME).toLocalDateTime();
-                int appointmentStatus = resultSet.getInt(COLUMN_LABEL_STATUS_ID);
-                Appointment anotherAppointmentFromDB = new Appointment(appointmentId, appointmentType, appointmentMasterId,
-                        clientId, appointmentBeginingTime, appointmentEndingTime, appointmentOrderingTime, appointmentStatus);
-                appointments.add(anotherAppointmentFromDB);
-            }
+            executeAppointmentResultSet(preparedStatement, appointments);
         } catch (SQLException e) {
             LOGGER.log(Level.WARN, "Can't insert new appointment to database. ", e);
         } finally {
@@ -84,26 +70,12 @@ public class AppointmentDAO {
     public static ArrayList<Appointment> selectAppointmentsByMasterIdForNext14Days(int masterId) {      //14 days - planning period when users may order the consultation
         Connection connection = null;
         PreparedStatement preparedStatement;
-        ResultSet resultSet;
         ArrayList<Appointment> appointments = new ArrayList<>();
         try {
             connection = ConnectionPool.getInstance().getConnection();
             preparedStatement = connection.prepareStatement(QueryToDatabase.SELECT_APPOINTMENTS_BY_MASTER_ID_FOR_NEX_14_DAYS.getQuery());
             preparedStatement.setInt(1, masterId);
-            resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                int appointmentId = resultSet.getInt(COLUMN_LABEL_APPOINTMENT_ID);
-                int appointmentType = resultSet.getInt(COLUMN_LABEL_APPOINTMENT_TYPE);
-                int appointmentMasterId = resultSet.getInt(COLUMN_LABEL_MASTER_ID);
-                int clientId = resultSet.getInt(COLUMN_LABEL_CLIENT_ID);
-                LocalDateTime appointmentBeginingTime = resultSet.getTimestamp(COLUMN_LABEL_BEGINING_TIME).toLocalDateTime();
-                LocalDateTime appointmentEndingTime = resultSet.getTimestamp(COLUMN_LABEL_ENDING_TIME).toLocalDateTime();
-                LocalDateTime appointmentOrderingTime = resultSet.getTimestamp(COLUMN_LABEL_ORDERING_TIME).toLocalDateTime();
-                int appointmentStatus = resultSet.getInt(COLUMN_LABEL_STATUS_ID);
-                Appointment anotherAppointmentFromDB = new Appointment(appointmentId, appointmentType, appointmentMasterId,
-                        clientId, appointmentBeginingTime, appointmentEndingTime, appointmentOrderingTime, appointmentStatus);
-                appointments.add(anotherAppointmentFromDB);
-            }
+            executeAppointmentResultSet(preparedStatement, appointments);
         } catch (SQLException e) {
             LOGGER.log(Level.WARN, "Can't insert new appointment to database. ", e);
         } finally {
@@ -117,26 +89,12 @@ public class AppointmentDAO {
     public static ArrayList<Appointment> selectAppointmentsByClientIdForNext14Days(int clientId) {      //14 days - planning period when users may order the consultation
         Connection connection = null;
         PreparedStatement preparedStatement;
-        ResultSet resultSet;
         ArrayList<Appointment> appointments = new ArrayList<>();
         try {
             connection = ConnectionPool.getInstance().getConnection();
             preparedStatement = connection.prepareStatement(QueryToDatabase.SELECT_APPOINTMENTS_BY_CLIENT_ID_FOR_NEX_14_DAYS.getQuery());
             preparedStatement.setInt(1, clientId);
-            resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                int appointmentId = resultSet.getInt(COLUMN_LABEL_APPOINTMENT_ID);
-                int appointmentType = resultSet.getInt(COLUMN_LABEL_APPOINTMENT_TYPE);
-                int appointmentMasterId = resultSet.getInt(COLUMN_LABEL_MASTER_ID);
-                int appointmetnClientId = resultSet.getInt(COLUMN_LABEL_CLIENT_ID);
-                LocalDateTime appointmentBeginingTime = resultSet.getTimestamp(COLUMN_LABEL_BEGINING_TIME).toLocalDateTime();
-                LocalDateTime appointmentEndingTime = resultSet.getTimestamp(COLUMN_LABEL_ENDING_TIME).toLocalDateTime();
-                LocalDateTime appointmentOrderingTime = resultSet.getTimestamp(COLUMN_LABEL_ORDERING_TIME).toLocalDateTime();
-                int appointmentStatus = resultSet.getInt(COLUMN_LABEL_STATUS_ID);
-                Appointment anotherAppointmentFromDB = new Appointment(appointmentId, appointmentType, appointmentMasterId,
-                        appointmetnClientId, appointmentBeginingTime, appointmentEndingTime, appointmentOrderingTime, appointmentStatus);
-                appointments.add(anotherAppointmentFromDB);
-            }
+            executeAppointmentResultSet(preparedStatement, appointments);
         } catch (SQLException e) {
             LOGGER.log(Level.WARN, "Can't insert new appointment to database. ", e);
         } finally {
@@ -145,5 +103,22 @@ public class AppointmentDAO {
             }
         }
         return appointments;
+    }
+
+    private static void executeAppointmentResultSet(PreparedStatement preparedStatement, ArrayList<Appointment> appointments) throws SQLException{
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            int appointmentId = resultSet.getInt(COLUMN_LABEL_APPOINTMENT_ID);
+            int appointmentType = resultSet.getInt(COLUMN_LABEL_APPOINTMENT_TYPE);
+            int appointmentMasterId = resultSet.getInt(COLUMN_LABEL_MASTER_ID);
+            int appointmetnClientId = resultSet.getInt(COLUMN_LABEL_CLIENT_ID);
+            LocalDateTime appointmentBeginingTime = resultSet.getTimestamp(COLUMN_LABEL_BEGINING_TIME).toLocalDateTime();
+            LocalDateTime appointmentEndingTime = resultSet.getTimestamp(COLUMN_LABEL_ENDING_TIME).toLocalDateTime();
+            LocalDateTime appointmentOrderingTime = resultSet.getTimestamp(COLUMN_LABEL_ORDERING_TIME).toLocalDateTime();
+            int appointmentStatus = resultSet.getInt(COLUMN_LABEL_STATUS_ID);
+            Appointment anotherAppointmentFromDB = new Appointment(appointmentId, appointmentType, appointmentMasterId,
+                    appointmetnClientId, appointmentBeginingTime, appointmentEndingTime, appointmentOrderingTime, appointmentStatus);
+            appointments.add(anotherAppointmentFromDB);
+        }
     }
 }

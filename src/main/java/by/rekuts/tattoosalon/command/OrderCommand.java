@@ -27,8 +27,6 @@ public class OrderCommand implements ActionCommand {
         LocalTime orderingTime = beginOfWork.plus(30*timeIndex, ChronoUnit.MINUTES);
         LocalTime endOrderingTime = orderingTime.plus(30, ChronoUnit.MINUTES);
 
-
-
         int typeConsult = Appointment.appointmentType.CONSULTATION.ordinal();
         int masterId = Integer.parseInt(request.getParameter("masterId"));
         int clientId = ((SalonUser) request.getSession().getAttribute("salonUser")).getId();
@@ -46,17 +44,6 @@ public class OrderCommand implements ActionCommand {
             request.setAttribute("message", MessageManager.getProperty("message.appointment.bad"));
             page = ConfigurationManager.getProperty("path.page.confirmation");
         }
-
-//        if(!RegistrationLogic.checkLogin(user.getLogin()) && !RegistrationLogic.checkEmail(user.getEmail())) {
-//            RegistrationLogic.insertUser(user);
-//            page = ConfigurationManager.getProperty("path.page.createuser");        //new page
-//        } else if (RegistrationLogic.checkLogin(user.getLogin())){
-//            request.setAttribute("errorLoginExists", MessageManager.getProperty("message.errorloginexists"));
-//            page = ConfigurationManager.getProperty("path.page.registration");
-//        } else {
-//            request.setAttribute("errorEmailExists", MessageManager.getProperty("message.erroremailexists"));
-//            page = ConfigurationManager.getProperty("path.page.registration");
-//        }
         return page;
     }
 }

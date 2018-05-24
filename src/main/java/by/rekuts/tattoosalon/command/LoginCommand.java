@@ -44,7 +44,8 @@ public class LoginCommand implements ActionCommand {
                 List<Publication> viewedPublications = allPublications.subList(fromIndex, toIndex);
                 request.setAttribute("viewedPublications", viewedPublications);
 
-                /** path to main.jsp*/
+                /* path to main.jsp*/
+
                 page = ConfigurationManager.getProperty("path.page.command.main");
             } else {
                 request.setAttribute("errorLoginPassMessage", MessageManager.getProperty("message.loginblocked"));

@@ -16,11 +16,13 @@ public class PageCabinetCommand implements ActionCommand {
         request.setAttribute("uname", user);
         request.setAttribute("publicationSum", UserLogic.selectSumAuthorsPublictions(user.getLogin()));
 
-//        ArrayList<Appointment> appointedClientMeetings = AppointmentLogic.selectAppointmentsByClientIdForNext14Days(user.getId());
-//        request.setAttribute("appointedClientMeetings", appointedClientMeetings);
-//todo показывать пользователю его назначенные консультации
-//        ArrayList<Appointment> appointedMasterMeetings = AppointmentLogic.selectAppointmentsByMasterIdForNext14Days(user.getId());
-//        request.setAttribute("appointedMasterMeetings", appointedMasterMeetings);
+        ArrayList<Appointment> appointedMasterMeetings = AppointmentLogic.selectAppointmentsByMasterIdForNext14Days(user.getId());
+        request.setAttribute("appointedMasterMeetings", appointedMasterMeetings);
+        ArrayList<Appointment> appointedClientMeetings = AppointmentLogic.selectAppointmentsByClientIdForNext14Days(user.getId());
+        request.setAttribute("appointedClientMeetings", appointedClientMeetings);
+
+        request.setAttribute("users", UserLogic.selectAllUsers());
+
         return ConfigurationManager.getProperty("path.page.main");
     }
 }
