@@ -16,7 +16,7 @@ public class SendMailCommand implements ActionCommand {
     private static final Logger LOGGER = LogManager.getLogger(SendMailCommand.class.getName());
     @Override
     public String execute(HttpServletRequest request) {
-        String page = null;
+        String page;
 
         Properties properties = new Properties();
         ServletContext context = request.getServletContext();

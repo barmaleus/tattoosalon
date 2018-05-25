@@ -22,6 +22,17 @@
         <exception-type>java.lang.RuntimeException</exception-type>
         <location>/page/error/error.jsp</location>
     </error-page>
+    <error-page>
+        <exception-type>by.rekuts.tattoosalon.exception.SalonException</exception-type>
+        <location>/page/error/error.jsp</location>
+    </error-page>
+
+    <listener>
+        <listener-class>by.rekuts.tattoosalon.listeners.InitializationClass</listener-class>
+    </listener>
+    <listener>
+        <listener-class>by.rekuts.tattoosalon.listeners.SessionListener</listener-class>
+    </listener>
 
     <servlet>
         <servlet-name>controller</servlet-name>
