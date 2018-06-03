@@ -2,6 +2,7 @@ package by.rekuts.tattoosalon.subject;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class Appointment extends SalonEntity implements Serializable {
 
@@ -110,5 +111,25 @@ public class Appointment extends SalonEntity implements Serializable {
 
     public void setAppointmentStatus(int appointmentStatus) {
         this.appointmentStatus = appointmentStatus;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Appointment that = (Appointment) o;
+        return appointmentType == that.appointmentType &&
+                masterId == that.masterId &&
+                clientId == that.clientId &&
+                appointmentStatus == that.appointmentStatus &&
+                Objects.equals(beginOfAppointment, that.beginOfAppointment) &&
+                Objects.equals(endOfAppointment, that.endOfAppointment) &&
+                Objects.equals(timeOfOrder, that.timeOfOrder);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(appointmentType, masterId, clientId, beginOfAppointment, endOfAppointment, timeOfOrder, appointmentStatus);
     }
 }

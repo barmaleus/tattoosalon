@@ -6,7 +6,7 @@
 <fmt:setBundle basename="localization.login" var="lang"/>
 <html lang="${language}">
 <head>
-    <title>Tattoo Salon :: Login Page</title>
+    <title><fmt:message key="login.title" bundle="${lang}"/></title>
     <script src="${pageContext.request.contextPath}/js/prime.js"></script>
     <link type="text/css" href="${pageContext.request.contextPath}/css/style_login.css" rel="stylesheet">
     <link type="text/css" href="${pageContext.request.contextPath}/css/button.css" rel="stylesheet">

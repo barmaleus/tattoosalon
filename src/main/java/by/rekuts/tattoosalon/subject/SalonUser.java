@@ -1,8 +1,5 @@
 package by.rekuts.tattoosalon.subject;
 
-import by.rekuts.tattoosalon.resource.ConfigurationManager;
-import by.rekuts.tattoosalon.resource.MessageManager;
-
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionBindingEvent;
@@ -201,10 +198,8 @@ public class SalonUser extends SalonEntity implements Serializable, HttpSessionB
         @SuppressWarnings("unchecked")
         HashSet<String> logins = (HashSet<String>) sc.getAttribute("logins");
         if (logins.isEmpty() || !logins.contains(this.getLogin())) {
-            System.out.println("A user session has been created");
             logins.add(this.getLogin());
             sc.setAttribute("logins", logins);
-            System.out.println("1. Logins: " + session.getServletContext().getAttribute("logins"));
             this.loggedIn = false;
         } else {
             this.loggedIn = true;

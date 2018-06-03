@@ -13,8 +13,8 @@ import java.util.ArrayList;
 public class PageAdminCommand implements ActionCommand {
     @Override
     public String execute(HttpServletRequest request) {
-        String userLogin = (String) request.getSession().getAttribute("user");
-        if(UserLogic.checkUserRole(userLogin) == 0) {
+        SalonUser user = (SalonUser) request.getSession().getAttribute("salonUser");
+        if(UserLogic.checkUserRole(user.getLogin()) == 0) {
             ArrayList<Publication> viewedPublications = PublicationLogic.viewAllPublications();
             request.setAttribute("viewedPublications", viewedPublications);
             ArrayList<SalonUser> allUsers = UserLogic.selectAllUsers();

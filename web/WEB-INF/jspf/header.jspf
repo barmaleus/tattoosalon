@@ -3,9 +3,9 @@
 <header class="header">
     <a href="#default" class="logo"><fmt:message key="header.salon" bundle="${lang}"/></a>
     <div class="header-right">
-        <a href="controller?command=cabinet&uname=${user}"><fmt:message key="header.welcome" bundle="${lang}"/>, ${user}!</a>
-        <a href="controller?command=cabinet&uname=${user}"><fmt:message key="header.cabinet" bundle="${lang}"/></a>
-        <c:if test="${userRange < 2}">
+        <a href="controller?command=cabinet&uname=${salonUser.login}"><fmt:message key="header.welcome" bundle="${lang}"/>, ${salonUser.name} ${salonUser.surname}!</a>
+        <a href="controller?command=cabinet&uname=${salonUser.login}"><fmt:message key="header.cabinet" bundle="${lang}"/></a>
+        <c:if test="${salonUser.userRole < 2}">
             <a href="controller?command=add_article"><fmt:message key="header.add.article" bundle="${lang}"/></a>
             <a href="controller?command=add_portfolio"><fmt:message key="header.add.portfolio" bundle="${lang}"/></a>
         </c:if>

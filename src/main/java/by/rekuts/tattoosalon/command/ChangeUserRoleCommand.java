@@ -1,10 +1,15 @@
 package by.rekuts.tattoosalon.command;
 
+import by.rekuts.tattoosalon.exception.SalonException;
 import by.rekuts.tattoosalon.logic.UserLogic;
+import by.rekuts.tattoosalon.resource.ConfigurationManager;
+import by.rekuts.tattoosalon.resource.MessageManager;
+import by.rekuts.tattoosalon.subject.SalonUser;
+
 import javax.servlet.http.HttpServletRequest;
 
 public class ChangeUserRoleCommand implements ActionCommand {
-    private static final String PARAM_NAME_USER = "user";
+    private static final String PARAM_NAME_USER = "salonUser";
     private static final String PARAM_NAME_USER_ID = "userId";
     private static final String PARAM_NAME_OPERATION = "operation";
     private static final String MAKE_USER_OPERATION = "makeUser";
@@ -16,7 +21,7 @@ public class ChangeUserRoleCommand implements ActionCommand {
 
     @Override
     public String execute(HttpServletRequest request) {
-        String userLogin = (String) request.getSession().getAttribute(PARAM_NAME_USER);
+        String userLogin = ((SalonUser)request.getSession().getAttribute(PARAM_NAME_USER)).getLogin();
         boolean flag = false;
         String page;
         int userId = Integer.parseInt(request.getParameter(PARAM_NAME_USER_ID));
@@ -33,7 +38,12 @@ public class ChangeUserRoleCommand implements ActionCommand {
                 flag = UserLogic.changeUserRole(userId, PARAM_ADMIN_ID);
                 break;
         }
-        page = AdminCommandsValidator.adminCommandsValidator(request, flag, userLogin);
+        try {
+            page = AdminCommandsValidator.adminCommandsValidator(request, flag, userLogin);
+        } catch (SalonException e) {
+            request.setAttribute("someErorMessage", MessageManager.getProperty("message.norightsadmin"));
+            page = ConfigurationManager.getProperty("path.page.error");
+        }
         return page;
     }
 }

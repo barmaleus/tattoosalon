@@ -6,7 +6,7 @@
 <fmt:setBundle basename="localization.nav_and_header" var="lang"/>
 <html>
 <head>
-    <title>Error Page</title>
+    <title><fmt:message key="error.title" bundle="${lang}"/>Error Page</title>
     <link type="text/css" href="${pageContext.request.contextPath}/css/button.css" rel="stylesheet">
     <link type="text/css" href="${pageContext.request.contextPath}/css/prime.css" rel="stylesheet">
 </head>

@@ -39,10 +39,10 @@
 
     <h3><fmt:message key="about.price.title" bundle="${lang}"/></h3>
     <ul>
-        <li><h3><fmt:message key="about.price.point1" bundle="${lang}"/></li>
-        <li><h3><fmt:message key="about.price.point2" bundle="${lang}"/></li>
-        <li><h3><fmt:message key="about.price.point3" bundle="${lang}"/></li>
-        <li><h3><fmt:message key="about.price.point4" bundle="${lang}"/></li>
+        <li><h3><fmt:message key="about.price.point1" bundle="${lang}"/></h3></li>
+        <li><h3><fmt:message key="about.price.point2" bundle="${lang}"/></h3></li>
+        <li><h3><fmt:message key="about.price.point3" bundle="${lang}"/></h3></li>
+        <li><h3><fmt:message key="about.price.point4" bundle="${lang}"/></h3></li>
     </ul>
 
 </section>

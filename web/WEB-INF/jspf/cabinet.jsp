@@ -1,140 +1,144 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set var="language" value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}" scope="session" />
+<fmt:setLocale value="${language}" />
+<fmt:setBundle basename="localization.nav_and_header" var="lang"/>
 <section>
     <c:choose>
-        <c:when test="${userRange == 0 || user == uname.login}"><%--if user is himself or admin--%>
-            Id: ${uname.id}
+        <c:when test="${salonUser.userRole == 0 || salonUser.login == uname.login}"><%--if user is himself or admin--%>
+            <fmt:message key="cabinet.id" bundle="${lang}"/>: ${uname.id}
             <br>
-            Login: ${uname.login}
+            <fmt:message key="cabinet.login" bundle="${lang}"/>: ${uname.login}
             <br>
-            Name: ${uname.name} ${uname.surname}
+            <fmt:message key="cabinet.name" bundle="${lang}"/>: ${uname.name} ${uname.surname}
             <br>
-            Email: ${uname.email}
+            <fmt:message key="cabinet.email" bundle="${lang}"/>: ${uname.email}
             <br>
-            Gender: 
+            <fmt:message key="cabinet.gender" bundle="${lang}"/>:
             <c:choose>
                 <c:when test="${uname.male == true}">
-                    male
+                    <fmt:message key="cabinet.male" bundle="${lang}"/>
                 </c:when>
                 <c:otherwise>
-                    female
+                    <fmt:message key="cabinet.female" bundle="${lang}"/>
                 </c:otherwise>
             </c:choose>
             <br>
-            Role:
+            <fmt:message key="cabinet.role" bundle="${lang}"/>:
             <c:choose>
                 <c:when test="${uname.userRole == 0}">
-                    admin
+                    <fmt:message key="cabinet.admin" bundle="${lang}"/>
                 </c:when>
                 <c:when test="${uname.userRole == 1}">
-                    master
+                    <fmt:message key="cabinet.master" bundle="${lang}"/>
                 </c:when>
                 <c:otherwise>
-                    user
+                    <fmt:message key="cabinet.user" bundle="${lang}"/>
                 </c:otherwise>
             </c:choose>
             <br>
-            Registered: ${uname.registration}
+            <fmt:message key="cabinet.registered" bundle="${lang}"/>: ${uname.registration}
             <br>
-            Birth date: ${uname.birth}
+            <fmt:message key="cabinet.birth" bundle="${lang}"/>: ${uname.birth}
             <br>
-            Blocked: ${uname.blocked}
+            <fmt:message key="cabinet.blocked" bundle="${lang}"/>: ${uname.blocked}
             <br>
             <br>
             <c:choose>
                 <c:when test="${uname.userRole <= 1}">
-                    Created publications: ${publicationSum}
+                    <fmt:message key="cabinet.publications" bundle="${lang}"/>: ${publicationSum}
                 </c:when>
                 <c:when test="${uname.userRole == 2}">
-                    ${uname.login} can't create publications.
+                    ${uname.login} <fmt:message key="cabinet.publications.not" bundle="${lang}"/>.
                 </c:when>
             </c:choose>
             <br>
-            <a href="controller?command=cabinet_block_user&userId=${uname.id}&uname=${uname.login}&blocked=${uname.blocked}" onclick="return confirm('Are you sure you want to delete this account?')">
+            <a href="controller?command=cabinet_block_user&userId=${uname.id}&uname=${uname.login}&blocked=${uname.blocked}" onclick="return confirm('<fmt:message key="cabinet.delete.confirm" bundle="${lang}"/>')">
                 <c:choose>
                     <c:when test="${uname.blocked}">
-                        Restore account
+                        <fmt:message key="cabinet.restore" bundle="${lang}"/>
                     </c:when>
                     <c:otherwise>
-                        Delete account
+                        <fmt:message key="cabinet.delete" bundle="${lang}"/>
                     </c:otherwise>
                 </c:choose>
             </a>
         </c:when>
         <c:otherwise>
-            Login: ${uname.login}
+            <fmt:message key="cabinet.login" bundle="${lang}"/>: ${uname.login}
             <br>
-            Role:
+            <fmt:message key="cabinet.role" bundle="${lang}"/>:
             <c:choose>
                 <c:when test="${uname.userRole == 0}">
-                    admin
+                    <fmt:message key="cabinet.admin" bundle="${lang}"/>
                 </c:when>
                 <c:when test="${uname.userRole == 1}">
-                    master
+                    <fmt:message key="cabinet.master" bundle="${lang}"/>
                 </c:when>
                 <c:otherwise>
-                    user
+                    <fmt:message key="cabinet.user" bundle="${lang}"/>
                 </c:otherwise>
             </c:choose>
             <br>
-            Registered: ${uname.registration}
+            <fmt:message key="cabinet.registered" bundle="${lang}"/>: ${uname.registration}
             <br>
             <br>
             <c:choose>
                 <c:when test="${uname.userRole <= 1}">
-                    Created publications: ${publicationSum}
+                    <fmt:message key="cabinet.publications" bundle="${lang}"/>: ${publicationSum}
                 </c:when>
                 <c:when test="${uname.userRole == 2}">
-                    ${uname.login} can't create publications.
+                    ${uname.login} <fmt:message key="cabinet.publications.not" bundle="${lang}"/>.
                 </c:when>
             </c:choose>
         </c:otherwise>
     </c:choose>
 
-    <%--List of appointments to masters like a client.--%>
+    <%--List of appointments to masters as a client.--%>
 
     <br>
     <br>
     <br>
 <c:if test="${uname.id == salonUser.id || salonUser.userRole == 0}"> <%--Only admin may see everybody's appointments and every user their own ones.--%>
-    Appointed:
+    <fmt:message key="cabinet.appointed" bundle="${lang}"/>:
     <c:if test="${empty appointedClientMeetings}">
-        None.
+        <fmt:message key="cabinet.appointed.not" bundle="${lang}"/>.
     </c:if>
     <br>
     <c:forEach items="${appointedClientMeetings}" var="appointment">
-            Time: ${appointment.beginOfAppointment},
-            master:
+        <fmt:message key="cabinet.time" bundle="${lang}"/>: ${appointment.beginOfAppointment},
+        <fmt:message key="cabinet.master" bundle="${lang}"/>:
         <c:forEach items="${users}" var="master">
             <c:if test="${master.id == appointment.masterId}">
                 ${master.name} ${master.surname}
             </c:if>
         </c:forEach>,
-            type of appointment:
+        <fmt:message key="cabinet.appointment.type" bundle="${lang}"/>:
             <c:choose>
                 <c:when test="${appointment.appointmentType == 0}">
-                    consultation
+                    <fmt:message key="cabinet.consultation" bundle="${lang}"/>
                 </c:when>
                 <c:when test="${appointment.appointmentType == 1}">
-                    tattooing
+                    <fmt:message key="cabinet.tattooing" bundle="${lang}"/>
                 </c:when>
                 <c:when test="${appointment.appointmentType == 2}">
-                    piercing
+                    <fmt:message key="cabinet.piercing" bundle="${lang}"/>piercing
                 </c:when>
                 <c:when test="${appointment.appointmentType == 3}">
-                    premanent makeup
+                    <fmt:message key="cabinet.makeup" bundle="${lang}"/>
                 </c:when>
             </c:choose>,
-            status:
+        <fmt:message key="cabinet.status" bundle="${lang}"/>:
             <c:choose>
                 <c:when test="${appointment.appointmentStatus == 0}">
-                    appointed
+                    <fmt:message key="cabinet.appointed.s" bundle="${lang}"/>
                 </c:when>
                 <c:when test="${appointment.appointmentStatus == 1}">
-                    canceled
+                    <fmt:message key="cabinet.canceled" bundle="${lang}"/>canceled
                 </c:when>
                 <c:when test="${appointment.appointmentType == 2}">
-                    failure to attend
+                    <fmt:message key="cabinet.attend.not" bundle="${lang}"/>
                 </c:when>
             </c:choose>.
             <br>
@@ -147,44 +151,44 @@
     <br>
     <c:if test="${uname.id == salonUser.id && uname.userRole == 1 || salonUser.userRole == 0 && uname.userRole == 1}">
         <br>
-        Appointed clients:
+        <fmt:message key="cabinet.appointed.clients" bundle="${lang}"/>:
         <c:if test="${empty appointedMasterMeetings}">
-            None.
+            <fmt:message key="cabinet.appointed.not" bundle="${lang}"/>.
         </c:if>
         <br>
         <c:forEach items="${appointedMasterMeetings}" var="appointment">
-            Time: ${appointment.beginOfAppointment},
-            client:
+            <fmt:message key="cabinet.time" bundle="${lang}"/>: ${appointment.beginOfAppointment},
+            <fmt:message key="cabinet.client" bundle="${lang}"/>:
             <c:forEach items="${users}" var="client">
                 <c:if test="${client.id == appointment.clientId}">
                     ${client.name} ${client.surname}
                 </c:if>
             </c:forEach>,
-            type of appointment:
+            <fmt:message key="cabinet.appointment.type" bundle="${lang}"/>:
             <c:choose>
                 <c:when test="${appointment.appointmentType == 0}">
-                    consultation
+                    <fmt:message key="cabinet.consultation" bundle="${lang}"/>
                 </c:when>
                 <c:when test="${appointment.appointmentType == 1}">
-                    tattooing
+                    <fmt:message key="cabinet.tattooing" bundle="${lang}"/>
                 </c:when>
                 <c:when test="${appointment.appointmentType == 2}">
-                    piercing
+                    <fmt:message key="cabinet.piercing" bundle="${lang}"/>
                 </c:when>
                 <c:when test="${appointment.appointmentType == 3}">
-                    premanent makeup
+                    <fmt:message key="cabinet.makeup" bundle="${lang}"/>
                 </c:when>
             </c:choose>,
-            status:
+            <fmt:message key="cabinet.status" bundle="${lang}"/>:
             <c:choose>
                 <c:when test="${appointment.appointmentStatus == 0}">
-                    appointed
+                    <fmt:message key="cabinet.appointed.s" bundle="${lang}"/>
                 </c:when>
                 <c:when test="${appointment.appointmentStatus == 1}">
-                    canceled
+                    <fmt:message key="cabinet.canceled" bundle="${lang}"/>canceled
                 </c:when>
                 <c:when test="${appointment.appointmentType == 2}">
-                    failure to attend
+                    <fmt:message key="cabinet.attend.not" bundle="${lang}"/>
                 </c:when>
             </c:choose>.
             <br>

@@ -1,5 +1,9 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set var="language" value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}" scope="session" />
+<fmt:setLocale value="${language}" />
+<fmt:setBundle basename="localization.nav_and_header" var="lang"/>
 <section>
     <c:forEach items="${masters}" var="master">
         <div class="master-block">
@@ -11,7 +15,7 @@
             <div class="master-button">
                 <form action="controller">
                     <input type="hidden" name="command" value="masters">
-                    <input type="submit" name="button" onclick="return confirm('Reviews will be available soon!')" value="Отзывы">
+                    <input type="submit" name="button" onclick="return confirm('<fmt:message key="master.message.reviews" bundle="${lang}"/>')" value="<fmt:message key="master.button.reviews" bundle="${lang}"/>">
                 </form>
             </div>
             <div class="master-button">

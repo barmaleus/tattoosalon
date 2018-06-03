@@ -1,14 +1,18 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page pageEncoding="UTF-8" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="language" value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}" scope="session" />
+<fmt:setLocale value="${language}" />
+<fmt:setBundle basename="localization.nav_and_header" var="lang"/>
 <link type="text/css" href="${pageContext.request.contextPath}/css/prime.css" rel="stylesheet">
 <section>
 
-    <h2>Online appointment</h2>
-    Current date: <c:out value="${twoWeeksSinceToday[0]}"/>
-    Choosed master:
+    <h2><fmt:message key="apnmt.title" bundle="${lang}"/></h2>
+    <fmt:message key="apnmt.date.current" bundle="${lang}"/>: <c:out value="${twoWeeksSinceToday[0]}"/>
+    <fmt:message key="apnmt.master.chosen" bundle="${lang}"/>:
     <c:choose>
         <c:when test="${masterId == null}">
-            None
+            <fmt:message key="apnmt.master.none" bundle="${lang}"/>
         </c:when>
         <c:otherwise>
             <c:forEach items="${masters}" var="master">
@@ -26,13 +30,13 @@
         <select name="master-id">
             <c:choose>
                 <c:when test="${masterId == null}">
-                    <option selected disabled>Choose master</option>
+                    <option selected disabled><fmt:message key="apnmt.master.choose" bundle="${lang}"/></option>
                     <c:forEach items="${masters}" var="master">
                         <option value="${master.id}">${master.name} ${master.surname}</option>
                     </c:forEach>
                 </c:when>
                 <c:otherwise>
-                    <option disabled>Choose master</option>
+                    <option disabled><fmt:message key="apnmt.master.choose" bundle="${lang}"/></option>
                     <c:forEach items="${masters}" var="master">
                         <c:choose>
                             <c:when test="${masterId eq master.id}">
@@ -46,7 +50,7 @@
                 </c:otherwise>
             </c:choose>
         </select>
-        <p><input type="submit" value="Choose this master"></p>
+        <p><input type="submit" value="<fmt:message key="apnmt.master.this" bundle="${lang}"/>"></p>
     </form>
 
     <c:choose>
@@ -70,7 +74,7 @@
                                 <c:choose>
                                     <c:when test="${row.index < pastHoursValidateIndex && column.index == 0}" >
                                         <form>
-                                            <input disabled type="submit" value="Passed">
+                                            <input disabled type="submit" value="<fmt:message key="apnmt.passed" bundle="${lang}"/>">
                                         </form>
                                     </c:when>
                                     <c:otherwise>
@@ -80,8 +84,8 @@
                                             <input type="hidden" name="today" value="${twoWeeksSinceToday[0]}" />
                                             <input type="hidden" name="rowIndex" value="${row.index}">
                                             <input type="hidden" name="columnIndex" value="${column.index}">
-                                            <input type="submit" value="Order"
-                                                   onclick="return confirm('Are you sure you want to make appointment for this time?')"
+                                            <input type="submit" value="<fmt:message key="apnmt.order" bundle="${lang}"/>"
+                                                   onclick="return confirm('<fmt:message key="apnmt.order.confirm" bundle="${lang}"/>')"
                                             <c:forEach items="${appointedMeetingsTimeIndex}" var="timeIndex" varStatus="status">
                                             <c:if test="${row.index == timeIndex && column.index == appointedMeetingsDateIndex[status.index]}">
                                                 <c:out value="disabled='disabled'"/>

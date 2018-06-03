@@ -6,7 +6,7 @@
 <fmt:setBundle basename="localization.nav_and_header" var="lang"/>
 <html>
 <head>
-    <title>Admin Page</title>
+    <title><fmt:message key="admin.title" bundle="${lang}"/></title>
     <link type="text/css" href="${pageContext.request.contextPath}/css/nav_and_header.css" rel="stylesheet">
     <link type="text/css" href="${pageContext.request.contextPath}/css/publication.css" rel="stylesheet">
     <link type="text/css" href="${pageContext.request.contextPath}/css/admin.css" rel="stylesheet">

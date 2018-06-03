@@ -1,6 +1,7 @@
 package by.rekuts.tattoosalon.subject;
 
 import java.util.List;
+import java.util.Objects;
 
 public class ListPage<T> {
 
@@ -51,4 +52,20 @@ public class ListPage<T> {
         this.maxPerPage = maxPerPage;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ListPage<?> listPage = (ListPage<?>) o;
+        return page == listPage.page &&
+                total == listPage.total &&
+                maxPerPage == listPage.maxPerPage &&
+                Objects.equals(publications, listPage.publications);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(page, publications, total, maxPerPage);
+    }
 }

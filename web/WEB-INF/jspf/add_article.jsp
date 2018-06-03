@@ -1,19 +1,25 @@
+<%@ page pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="language" value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}" scope="session" />
+<fmt:setLocale value="${language}" />
+<fmt:setBundle basename="localization.nav_and_header" var="lang"/>
 <section>
-    <h2>Creating article</h2>
-    <p>Fulfill this form to upload new article to the site.</p>
+    <h2><fmt:message key="addarticle.name" bundle="${lang}"/></h2>
+    <p><fmt:message key="addarticle.form.desc" bundle="${lang}"/></p>
 
     <form action="controller" method="POST">
         <input type="hidden" name="command" value="confirmation" />
         <fieldset>
-            <legend>Creating form:</legend>
-            <span class="req">*</span>Title:
+            <legend><fmt:message key="addarticle.form.name" bundle="${lang}"/>:</legend>
+            <span class="req">*</span><fmt:message key="addarticle.title" bundle="${lang}"/>:
             <br>
-            <input required type="text" name="title" onkeyup="validate_add_publication(this)" placeholder="Write title here"><br>
-            <span class="req">*</span>Text:
+            <input required type="text" name="title" onkeyup="validate_add_publication(this)" placeholder="<fmt:message key="addarticle.title.placeholder" bundle="${lang}"/>"><br>
+            <span class="req">*</span><fmt:message key="addarticle.text" bundle="${lang}"/>:
             <br>
-            <textarea required name="text" style="width:700px; height:600px;" onkeyup="validate_add_publication(this)" placeholder="Write your text here"></textarea>
+            <textarea required name="text" style="width:700px; height:600px;" onkeyup="validate_add_publication(this)" placeholder="<fmt:message key="addarticle.text.placeholder" bundle="${lang}"/>"></textarea>
             <br>
-            <input type="submit" value="Upload text" />
+            <input type="submit" value="<fmt:message key="addarticle.button.ok" bundle="${lang}"/>" />
         </fieldset>
     </form>
 </section>

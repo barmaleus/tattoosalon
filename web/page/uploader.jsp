@@ -6,7 +6,7 @@
 <fmt:setBundle basename="localization.nav_and_header" var="lang"/>
 <html>
 <head>
-    <title>Image Uploader</title>
+    <title><fmt:message key="uploader.title" bundle="${lang}"/></title>
     <link type="text/css" href="${pageContext.request.contextPath}/css/nav_and_header.css" rel="stylesheet">
     <link type="text/css" href="${pageContext.request.contextPath}/css/publication.css" rel="stylesheet">
 </head>
@@ -15,19 +15,19 @@
 <%@include file="../WEB-INF/jspf/nav.jspf"%>
 <section>
     <div class="center">
-        <h1>File Upload</h1>
+        <h1><fmt:message key="uploader.file.name" bundle="${lang}"/></h1>
         <form method="post" action="uploader" enctype="multipart/form-data">
                 <br>
-                Select file to upload (max size 2 Mb):
+            <fmt:message key="uploader.file.desc" bundle="${lang}"/>:
                 <input type="file" name="file" size="60" />
                 <br>
                 ${fileTypeError}
                 <br>
-                <span class="req">* </span> Image title:
-                <input required type="text" name="title" onkeyup="validate_add_publication(this)" placeholder="Write photo title here" size="20" />
+                <span class="req">* </span> <fmt:message key="uploader.image.name" bundle="${lang}"/>:
+                <input required type="text" name="title" onkeyup="validate_add_publication(this)" placeholder="<fmt:message key="uploader.image.placeholder" bundle="${lang}"/>" size="20" />
             <br>
             <br>
-            <input type="submit" value="Upload" />
+            <input type="submit" value="<fmt:message key="uploader.button.ok" bundle="${lang}"/>" />
         </form>
     </div>
 </section>

@@ -1,6 +1,10 @@
 package by.rekuts.tattoosalon.command;
 
+import by.rekuts.tattoosalon.exception.SalonException;
 import by.rekuts.tattoosalon.logic.PublicationLogic;
+import by.rekuts.tattoosalon.resource.ConfigurationManager;
+import by.rekuts.tattoosalon.resource.MessageManager;
+
 import javax.servlet.http.HttpServletRequest;
 
 public class BlockPublicationCommand implements ActionCommand {
@@ -16,7 +20,12 @@ public String execute(HttpServletRequest request) {
     } else {
         flag = PublicationLogic.makePublicationBlocked(publicationId, true);
     }
-    page = AdminCommandsValidator.adminCommandsValidator(request, flag, userLogin);
+    try {
+        page = AdminCommandsValidator.adminCommandsValidator(request, flag, userLogin);
+    } catch (SalonException e) {
+        request.setAttribute("someErorMessage", MessageManager.getProperty("message.norightsadmin"));
+        page = ConfigurationManager.getProperty("path.page.error");
+    }
     return page;
 }
 }

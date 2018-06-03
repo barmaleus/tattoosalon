@@ -6,7 +6,7 @@
 <fmt:setBundle basename="localization.nav_and_header" var="lang"/>
 <html>
 <head>
-    <title>Tattoo Salon</title>
+    <title><fmt:message key="main.title" bundle="${lang}"/></title>
     <script src="${pageContext.request.contextPath}/js/prime.js"></script>
     <link type="text/css" href="${pageContext.request.contextPath}/css/nav_and_header.css" rel="stylesheet">
     <link type="text/css" href="${pageContext.request.contextPath}/css/publication.css" rel="stylesheet">

@@ -1,5 +1,6 @@
 package by.rekuts.tattoosalon.command;
 
+import by.rekuts.tattoosalon.exception.SalonException;
 import by.rekuts.tattoosalon.logic.PublicationLogic;
 import by.rekuts.tattoosalon.logic.UserLogic;
 import by.rekuts.tattoosalon.resource.ConfigurationManager;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 public class AdminCommandsValidator {
     private static final int PARAM_ADMIN_ID = 0;
 
-    static String adminCommandsValidator(HttpServletRequest request, boolean flag, String userLogin) {
+    static String adminCommandsValidator(HttpServletRequest request, boolean flag, String userLogin) throws SalonException{
         String page;
         if (flag && UserLogic.checkUserRole(userLogin) == PARAM_ADMIN_ID) {
             ArrayList<Publication> viewedPublications = PublicationLogic.viewAllPublications();
@@ -22,8 +23,7 @@ public class AdminCommandsValidator {
             request.setAttribute("allUsers", allUsers);
             page = ConfigurationManager.getProperty("path.page.admin");
         } else {
-            request.setAttribute("someErorMessage", MessageManager.getProperty("message.norightsadmin"));
-            page = ConfigurationManager.getProperty("path.page.error");
+            throw new SalonException(MessageManager.getProperty("message.notightsadmin"));
         }
         return page;
     }

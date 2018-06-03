@@ -8,7 +8,7 @@
     <li><a href="controller?command=appointment"><fmt:message key="nav.appointment" bundle="${lang}"/></a></li>
     <li><a href="controller?command=mail"><fmt:message key="nav.contact" bundle="${lang}"/></a></li>
     <li><a href="controller?command=about"><fmt:message key="nav.about" bundle="${lang}"/></a></li>
-    <c:if test="${userRange == 0}">
+    <c:if test="${salonUser.userRole == 0}">
         <li><a href="controller?command=admin"><fmt:message key="nav.administration" bundle="${lang}"/></a></li>
     </c:if>
 </ul>

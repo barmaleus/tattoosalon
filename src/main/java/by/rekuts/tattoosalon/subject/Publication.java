@@ -2,6 +2,7 @@ package by.rekuts.tattoosalon.subject;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class Publication implements Serializable {
     private int id;
@@ -86,5 +87,25 @@ public class Publication implements Serializable {
 
     public void setBlocked(boolean blocked) {
         this.blocked = blocked;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Publication that = (Publication) o;
+        return id == that.id &&
+                textNotPhoto == that.textNotPhoto &&
+                blocked == that.blocked &&
+                Objects.equals(title, that.title) &&
+                Objects.equals(content, that.content) &&
+                Objects.equals(author, that.author) &&
+                Objects.equals(publishTime, that.publishTime);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(id, title, content, textNotPhoto, author, publishTime, blocked);
     }
 }

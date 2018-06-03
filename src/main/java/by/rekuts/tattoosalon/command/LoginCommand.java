@@ -31,10 +31,7 @@ public class LoginCommand implements ActionCommand {
                 session.setAttribute("salonUser", user);
                 if (!user.isLoggedIn()) {   //check for user logged in in another browser or device
                     session.setAttribute("salonUser", user);
-                    session.setAttribute("user", login);        //todo refactor and delete
-                    session.setAttribute("userRange", UserLogic.checkUserRole(login));        //todo refactor and delete, check attributes below
                     ArrayList<Publication> allPublications = PublicationLogic.viewAllUnblockedPublications();
-                    request.setAttribute("allPublications", allPublications);
                     ListPage<Publication> results = new ListPage<>(allPublications, 0, allPublications.size(), 3);
                     request.setAttribute("results", results);
 

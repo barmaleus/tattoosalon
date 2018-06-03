@@ -6,7 +6,7 @@
 <fmt:setBundle basename="localization.nav_and_header" var="lang"/>
 <html>
 <head>
-    <title>Image Uploader</title>
+    <title><fmt:message key="send.title" bundle="${lang}"/></title>
     <link type="text/css" href="${pageContext.request.contextPath}/css/nav_and_header.css" rel="stylesheet">
     <link type="text/css" href="${pageContext.request.contextPath}/css/publication.css" rel="stylesheet">
 </head>
@@ -15,12 +15,12 @@
 <%@include file="../WEB-INF/jspf/nav.jspf"%>
 <section>
 <p>Sending in progress...</p>
-<a href="controller?command=mail">Return to new mail page</a>
+<a href="controller?command=mail"><fmt:message key="send.button.return" bundle="${lang}"/></a>
     <br>
     <form action="controller" method="POST">
         <input type="hidden" name="command" value="main" />
         <input type="hidden" name="page" value="0" />
-        <input type="submit" value="Back to main page" />
+        <input type="submit" value="<fmt:message key="send.button.main" bundle="${lang}"/>" />
     </form>
 </section>
 </body>
